@@ -57,7 +57,7 @@ export async function generateMetadata(
     authors: data?.authorName ? [{name: data.authorName}] : undefined,
     openGraph: {
       type: 'article',
-      publishedTime: data?.publishedAt,
+      publishedTime: data?.publishedAt || undefined,
       images: ogImage ? [ogImage, ...((await parent).openGraph?.images || [])] : [],
     },
   }

@@ -153,6 +153,79 @@ export type Slug = {
   source?: string
 }
 
+export type AuthorReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'author'
+}
+
+export type CategoryReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'category'
+}
+
+export type Post = {
+  _id: string
+  _type: 'post'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug?: Slug
+  author?: AuthorReference
+  categories?: Array<
+    {
+      _key: string
+    } & CategoryReference
+  >
+  publishedAt?: string
+  mainImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  overview?: string
+  body?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'normal' | 'h2' | 'h3' | 'h4' | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        caption?: string
+        alt?: string
+        _type: 'image'
+        _key: string
+      }
+  >
+  featured?: boolean
+  canonicalUrl?: string
+  noIndex?: boolean
+}
+
 export type Page = {
   _id: string
   _type: 'page'
@@ -210,6 +283,59 @@ export type Page = {
   >
 }
 
+export type Category = {
+  _id: string
+  _type: 'category'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug?: Slug
+  description?: string
+}
+
+export type Author = {
+  _id: string
+  _type: 'author'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+  slug?: Slug
+  role?: string
+  image?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  bio?: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: Array<{
+      href?: string
+      _type: 'link'
+      _key: string
+    }>
+    level?: number
+    _type: 'block'
+    _key: string
+  }>
+  socialLinks?: Array<{
+    platform?: 'LinkedIn' | 'X' | 'GitHub' | 'YouTube' | 'Other'
+    url?: string
+    _type: 'socialLink'
+    _key: string
+  }>
+}
+
 export type HomeReference = {
   _ref: string
   _type: 'reference'
@@ -222,6 +348,13 @@ export type PageReference = {
   _type: 'reference'
   _weak?: boolean
   [internalGroqTypeReferenceTo]?: 'page'
+}
+
+export type PostReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'post'
 }
 
 export type ProjectReference = {
@@ -237,7 +370,7 @@ export type Settings = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  menuItems?: ArrayOf<HomeReference | PageReference | ProjectReference>
+  menuItems?: ArrayOf<HomeReference | PageReference | PostReference | ProjectReference>
   footer?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -403,9 +536,15 @@ export type AllSanitySchemaTypes =
   | SanityImageHotspot
   | Duration
   | Slug
+  | AuthorReference
+  | CategoryReference
+  | Post
   | Page
+  | Category
+  | Author
   | HomeReference
   | PageReference
+  | PostReference
   | ProjectReference
   | Settings
   | Home
@@ -483,6 +622,120 @@ export type SlugPageQueryResult = {
   slug: string | null
 } | null
 
+// Source: app/(website)/blog/[slug]/page.tsx
+// Variable: postMetadataQuery
+// Query: *[_type == "post" && slug.current == $slug][0] {      title,      overview,      mainImage,      canonicalUrl,      noIndex,      publishedAt,      "authorName": author->name,    }
+export type PostMetadataQueryResult = {
+  title: string | null
+  overview: string | null
+  mainImage: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  } | null
+  canonicalUrl: string | null
+  noIndex: boolean | null
+  publishedAt: string | null
+  authorName: string | null
+} | null
+
+// Source: app/(website)/blog/[slug]/page.tsx
+// Variable: postQuery
+// Query: *[_type == "post" && slug.current == $slug][0] {      _id,      _type,      title,      overview,      body,      mainImage,      publishedAt,      "slug": slug.current,      "author": author->{name, role, image, "slug": slug.current},      "categories": categories[]->{title, "slug": slug.current},    }
+export type PostQueryResult = {
+  _id: string
+  _type: 'post'
+  title: string | null
+  overview: string | null
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'blockquote' | 'h2' | 'h3' | 'h4' | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        caption?: string
+        alt?: string
+        _type: 'image'
+        _key: string
+      }
+  > | null
+  mainImage: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  } | null
+  publishedAt: string | null
+  slug: string | null
+  author: {
+    name: string | null
+    role: string | null
+    image: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+    slug: string | null
+  } | null
+  categories: Array<{
+    title: string | null
+    slug: string | null
+  }> | null
+} | null
+
+// Source: app/(website)/blog/page.tsx
+// Variable: blogIndexQuery
+// Query: *[_type == "post" && !(_id in path("drafts.**")) && !noIndex] | order(publishedAt desc) {      _id,      _type,      "slug": slug.current,      title,      overview,      mainImage,      publishedAt,      "author": author->{name, "slug": slug.current},      "categories": categories[]->{title, "slug": slug.current},    }
+export type BlogIndexQueryResult = Array<{
+  _id: string
+  _type: 'post'
+  slug: string | null
+  title: string | null
+  overview: string | null
+  mainImage: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  } | null
+  publishedAt: string | null
+  author: {
+    name: string | null
+    slug: string | null
+  } | null
+  categories: Array<{
+    title: string | null
+    slug: string | null
+  }> | null
+}>
+
 // Source: app/(website)/layout.tsx
 // Variable: layoutMetadataQuery
 // Query: {    "settings": *[_type == "settings"][0]{ogImage},    "home": *[_type == "home"][0]{      title,      "overview": pt::text(overview),    }  }
@@ -504,7 +757,7 @@ export type LayoutMetadataQueryResult = {
 
 // Source: app/(website)/page.tsx
 // Variable: homePageQuery
-// Query: *[_type == "home"][0]{      _id,      _type,      overview,      showcaseProjects[]{        _key,        ...@->{          _id,          _type,          coverImage,          overview,          "slug": slug.current,          tags,          title,        }      },      title,    }
+// Query: *[_type == "home"][0]{      _id,      _type,      overview,      showcaseProjects[]{        _key,        ...@->{          _id,          _type,          coverImage,          overview,          "slug": slug.current,          tags,          title,        }      },      "latestPosts": *[_type == "post" && !(_id in path("drafts.**")) && !noIndex]        | order(publishedAt desc)[0...3]{          _id,          _type,          mainImage,          overview,          publishedAt,          "slug": slug.current,          title,        },      title,    }
 export type HomePageQueryResult = {
   _id: string
   _type: 'home'
@@ -555,6 +808,22 @@ export type HomePageQueryResult = {
     tags: Array<string> | null
     title: string | null
   }> | null
+  latestPosts: Array<{
+    _id: string
+    _type: 'post'
+    mainImage: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      alt?: string
+      _type: 'image'
+    } | null
+    overview: string | null
+    publishedAt: string | null
+    slug: string | null
+    title: string | null
+  }>
   title: string | null
 } | null
 
@@ -680,6 +949,12 @@ export type SettingsQueryResult = {
       }
     | {
         _key: null
+        _type: 'post'
+        slug: string | null
+        title: string | null
+      }
+    | {
+        _key: null
         _type: 'project'
         slug: string | null
         title: string | null
@@ -706,8 +981,11 @@ declare global {
   interface SanityQueries {
     '\n    *[_type == "page" && slug.current == $slug][0] {\n      title,\n      "overview": pt::text(overview),\n    }\n  ': SlugPageMetadataQueryResult
     '\n    *[_type == "page" && slug.current == $slug][0] {\n      _id,\n      _type,\n      body,\n      overview,\n      title,\n      "slug": slug.current,\n    }\n  ': SlugPageQueryResult
+    '\n    *[_type == "post" && slug.current == $slug][0] {\n      title,\n      overview,\n      mainImage,\n      canonicalUrl,\n      noIndex,\n      publishedAt,\n      "authorName": author->name,\n    }\n  ': PostMetadataQueryResult
+    '\n    *[_type == "post" && slug.current == $slug][0] {\n      _id,\n      _type,\n      title,\n      overview,\n      body,\n      mainImage,\n      publishedAt,\n      "slug": slug.current,\n      "author": author->{name, role, image, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': PostQueryResult
+    '\n    *[_type == "post" && !(_id in path("drafts.**")) && !noIndex] | order(publishedAt desc) {\n      _id,\n      _type,\n      "slug": slug.current,\n      title,\n      overview,\n      mainImage,\n      publishedAt,\n      "author": author->{name, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': BlogIndexQueryResult
     '{\n    "settings": *[_type == "settings"][0]{ogImage},\n    "home": *[_type == "home"][0]{\n      title,\n      "overview": pt::text(overview),\n    }\n  }': LayoutMetadataQueryResult
-    '\n    *[_type == "home"][0]{\n      _id,\n      _type,\n      overview,\n      showcaseProjects[]{\n        _key,\n        ...@->{\n          _id,\n          _type,\n          coverImage,\n          overview,\n          "slug": slug.current,\n          tags,\n          title,\n        }\n      },\n      title,\n    }\n  ': HomePageQueryResult
+    '\n    *[_type == "home"][0]{\n      _id,\n      _type,\n      overview,\n      showcaseProjects[]{\n        _key,\n        ...@->{\n          _id,\n          _type,\n          coverImage,\n          overview,\n          "slug": slug.current,\n          tags,\n          title,\n        }\n      },\n      "latestPosts": *[_type == "post" && !(_id in path("drafts.**")) && !noIndex]\n        | order(publishedAt desc)[0...3]{\n          _id,\n          _type,\n          mainImage,\n          overview,\n          publishedAt,\n          "slug": slug.current,\n          title,\n        },\n      title,\n    }\n  ': HomePageQueryResult
     '\n    *[_type == "project" && slug.current == $slug][0] {\n      coverImage,\n      title,\n      "overview": pt::text(overview),\n    }\n  ': ProjectSlugPageMetadataQueryResult
     '\n    *[_type == "project" && slug.current == $slug][0] {\n      _id,\n      _type,\n      client,\n      coverImage,\n      description,\n      duration,\n      overview,\n      site,\n      "slug": slug.current,\n      tags,\n      title,\n    }\n  ': ProjectSlugPageQueryResult
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    menuItems[]{\n      _key,\n      ...@->{\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    ogImage,\n  }\n': SettingsQueryResult
