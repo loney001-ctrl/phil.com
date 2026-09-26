@@ -755,6 +755,13 @@ export type LayoutMetadataQueryResult = {
   } | null
 }
 
+// Source: app/(website)/layout.tsx
+// Variable: homeTitleQuery
+// Query: *[_type == "home"][0]{title}
+export type HomeTitleQueryResult = {
+  title: string | null
+} | null
+
 // Source: app/(website)/page.tsx
 // Variable: homePageQuery
 // Query: *[_type == "home"][0]{      _id,      _type,      overview,      showcaseProjects[]{        _key,        ...@->{          _id,          _type,          coverImage,          overview,          "slug": slug.current,          tags,          title,        }      },      "latestPosts": *[_type == "post" && !(_id in path("drafts.**")) && !noIndex]        | order(publishedAt desc)[0...3]{          _id,          _type,          mainImage,          overview,          publishedAt,          "slug": slug.current,          title,        },      title,    }
@@ -910,6 +917,25 @@ export type ProjectSlugPageQueryResult = {
   title: string | null
 } | null
 
+// Source: app/sitemap.ts
+// Variable: query
+// Query: {    "pages": *[_type == "page" && defined(slug.current)]{"slug": slug.current, _updatedAt},    "projects": *[_type == "project" && defined(slug.current)]{"slug": slug.current, _updatedAt},    "posts": *[_type == "post" && defined(slug.current) && !noIndex]{"slug": slug.current, _updatedAt, publishedAt},  }
+export type QueryResult = {
+  pages: Array<{
+    slug: string | null
+    _updatedAt: string
+  }>
+  projects: Array<{
+    slug: string | null
+    _updatedAt: string
+  }>
+  posts: Array<{
+    slug: string | null
+    _updatedAt: string
+    publishedAt: string | null
+  }>
+}
+
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
 // Query: *[_type == "settings"][0]{    _id,    _type,    footer,    menuItems[]{      _key,      ...@->{        _type,        "slug": slug.current,        title      }    },    ogImage,  }
@@ -985,9 +1011,11 @@ declare global {
     '\n    *[_type == "post" && slug.current == $slug][0] {\n      _id,\n      _type,\n      title,\n      overview,\n      body,\n      mainImage,\n      publishedAt,\n      "slug": slug.current,\n      "author": author->{name, role, image, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': PostQueryResult
     '\n    *[_type == "post" && !(_id in path("drafts.**")) && !noIndex] | order(publishedAt desc) {\n      _id,\n      _type,\n      "slug": slug.current,\n      title,\n      overview,\n      mainImage,\n      publishedAt,\n      "author": author->{name, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': BlogIndexQueryResult
     '{\n    "settings": *[_type == "settings"][0]{ogImage},\n    "home": *[_type == "home"][0]{\n      title,\n      "overview": pt::text(overview),\n    }\n  }': LayoutMetadataQueryResult
+    '*[_type == "home"][0]{title}': HomeTitleQueryResult
     '\n    *[_type == "home"][0]{\n      _id,\n      _type,\n      overview,\n      showcaseProjects[]{\n        _key,\n        ...@->{\n          _id,\n          _type,\n          coverImage,\n          overview,\n          "slug": slug.current,\n          tags,\n          title,\n        }\n      },\n      "latestPosts": *[_type == "post" && !(_id in path("drafts.**")) && !noIndex]\n        | order(publishedAt desc)[0...3]{\n          _id,\n          _type,\n          mainImage,\n          overview,\n          publishedAt,\n          "slug": slug.current,\n          title,\n        },\n      title,\n    }\n  ': HomePageQueryResult
     '\n    *[_type == "project" && slug.current == $slug][0] {\n      coverImage,\n      title,\n      "overview": pt::text(overview),\n    }\n  ': ProjectSlugPageMetadataQueryResult
     '\n    *[_type == "project" && slug.current == $slug][0] {\n      _id,\n      _type,\n      client,\n      coverImage,\n      description,\n      duration,\n      overview,\n      site,\n      "slug": slug.current,\n      tags,\n      title,\n    }\n  ': ProjectSlugPageQueryResult
+    '{\n    "pages": *[_type == "page" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n    "projects": *[_type == "project" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n    "posts": *[_type == "post" && defined(slug.current) && !noIndex]{"slug": slug.current, _updatedAt, publishedAt},\n  }': QueryResult
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    menuItems[]{\n      _key,\n      ...@->{\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    ogImage,\n  }\n': SettingsQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }

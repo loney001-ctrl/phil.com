@@ -27,3 +27,15 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
  * Used to configure edit intent links, for Presentation Mode, as well as to configure where the Studio is mounted in the router.
  */
 export const studioUrl = '/studio'
+
+/**
+ * Canonical site origin, used for metadataBase, sitemap.xml, robots.txt, and JSON-LD.
+ * Set NEXT_PUBLIC_SITE_URL once the real domain is live; falls back to the Vercel preview/
+ * production URL Vercel sets automatically, then localhost for dev.
+ */
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL &&
+    `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`) ||
+  (process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`) ||
+  'http://localhost:3000'

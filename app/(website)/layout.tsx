@@ -10,6 +10,7 @@ import {CustomPortableText} from '@/components/CustomPortableText'
 import {DraftModeProvider} from '@/components/DraftModeContext'
 import {Navbar} from '@/components/Navbar'
 import IntroTemplate from '@/intro-template'
+import {siteUrl} from '@/sanity/lib/api'
 import {
   getDynamicFetchOptions,
   liveWaitFor,
@@ -73,6 +74,9 @@ export default async function PersonalLayout({children}: LayoutProps<'/'>) {
           <IntroTemplate />
         </Suspense>
       </div>
+      <Suspense>
+        <WebsiteJsonLd />
+      </Suspense>
       <Toaster />
       <SanityLive onError={handleError} includeDrafts={isDraftMode} waitFor={liveWaitFor} />
       {isDraftMode && (
@@ -158,5 +162,27 @@ async function CachedFooter({perspective, stega}: DynamicFetchOptions) {
         value={data.footer}
       />
     </footer>
+  )
+}
+
+/**
+ * Sitewide WebSite JSON-LD. Kept separate from per-page structured data (e.g. BlogPosting
+ * on /blog/[slug]) so it renders once regardless of route.
+ */
+async function WebsiteJsonLd() {
+  'use cache'
+  const homeTitleQuery = defineQuery(`*[_type == "home"][0]{title}`)
+  const {data: home} = await sanityFetchMetadata({query: homeTitleQuery, perspective: 'published'})
+  if (!home?.title) return null
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    'name': home.title,
+    'url': siteUrl,
+  }
+
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}} />
   )
 }

@@ -5,7 +5,7 @@ import {notFound} from 'next/navigation'
 import {CustomPortableText} from '@/components/CustomPortableText'
 import {Header} from '@/components/Header'
 import ImageBox from '@/components/ImageBox'
-import {studioUrl} from '@/sanity/lib/api'
+import {siteUrl, studioUrl} from '@/sanity/lib/api'
 import {
   getDynamicFetchOptions,
   sanityFetch,
@@ -14,7 +14,7 @@ import {
   type DynamicFetchOptions,
 } from '@/sanity/lib/live'
 import {slugsByTypeQuery, type SlugsByTypeQueryParams} from '@/sanity/lib/queries'
-import {urlForImage, urlForOpenGraphImage} from '@/sanity/lib/utils'
+import {resolveHref, urlForImage, urlForOpenGraphImage} from '@/sanity/lib/utils'
 
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({
@@ -103,8 +103,28 @@ async function CachedBlogSlugPage({
     ? urlForImage(author.image)?.width(96).height(96).fit('crop').url()
     : undefined
 
+  const postUrl = `${siteUrl}${resolveHref('post', data.slug) || ''}`
+  const schemaImageUrl = mainImage
+    ? urlForImage(mainImage)?.width(1200).height(630).fit('crop').url()
+    : undefined
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    'headline': title,
+    'description': overview,
+    'image': schemaImageUrl ? [schemaImageUrl] : undefined,
+    'datePublished': publishedAt || undefined,
+    'dateModified': publishedAt || undefined,
+    'mainEntityOfPage': {'@type': 'WebPage', '@id': postUrl},
+    'author': author?.name ? {'@type': 'Person', 'name': author.name} : undefined,
+  }
+
   return (
     <article className="space-y-8" data-testid="post-content">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
+      />
       <Header id={data._id} type={data._type} path={['overview']} centered title={title} />
 
       <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-gray-500">
