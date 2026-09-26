@@ -11,10 +11,10 @@ import {apiVersion, dataset, projectId, studioUrl} from '@/sanity/lib/api'
 import * as resolve from '@/sanity/plugins/resolve'
 import {pageStructure, singletonPlugin} from '@/sanity/plugins/settings'
 import author from '@/sanity/schemas/documents/author'
+import caseStudy from '@/sanity/schemas/documents/caseStudy'
 import category from '@/sanity/schemas/documents/category'
 import page from '@/sanity/schemas/documents/page'
 import post from '@/sanity/schemas/documents/post'
-import project from '@/sanity/schemas/documents/project'
 import duration from '@/sanity/schemas/objects/duration'
 import milestone from '@/sanity/schemas/objects/milestone'
 import timeline from '@/sanity/schemas/objects/timeline'
@@ -44,7 +44,7 @@ export default defineConfig({
       category,
       page,
       post,
-      project,
+      caseStudy,
       // Objects
       milestone,
       timeline,

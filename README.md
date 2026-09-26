@@ -13,8 +13,8 @@ Phil Loney's personal site — portfolio + blog. Next.js 16 (App Router, Cache C
 - `post` — blog posts (author, categories, cover image, portable-text body, SEO fields)
 - `author` — bylines
 - `category` — post taxonomy
-- `project` — portfolio case studies (from the original starter)
-- `page` — flat pages
+- `caseStudy` — case studies (client, duration, tags, description)
+- `page` — flat pages (also used for one-off pages like Contact and Resources)
 - `home` / `settings` — singletons
 
 ## Local development

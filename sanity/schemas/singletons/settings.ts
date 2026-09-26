@@ -29,7 +29,7 @@ export default defineType({
               type: 'post',
             },
             {
-              type: 'project',
+              type: 'caseStudy',
             },
           ],
         },

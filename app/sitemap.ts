@@ -8,10 +8,10 @@ import {resolveHref} from '@/sanity/lib/utils'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const query = defineQuery(`{
     "pages": *[_type == "page" && defined(slug.current)]{"slug": slug.current, _updatedAt},
-    "projects": *[_type == "project" && defined(slug.current)]{"slug": slug.current, _updatedAt},
+    "caseStudies": *[_type == "caseStudy" && defined(slug.current)]{"slug": slug.current, _updatedAt},
     "posts": *[_type == "post" && defined(slug.current) && !noIndex]{"slug": slug.current, _updatedAt, publishedAt},
   }`)
-  const {pages, projects, posts} = await client.fetch(query)
+  const {pages, caseStudies, posts} = await client.fetch(query)
 
   const entries: MetadataRoute.Sitemap = [
     {url: siteUrl, lastModified: new Date(), changeFrequency: 'weekly', priority: 1},
@@ -34,12 +34,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   }
 
-  for (const project of projects || []) {
-    const href = resolveHref('project', project.slug)
+  for (const caseStudy of caseStudies || []) {
+    const href = resolveHref('caseStudy', caseStudy.slug)
     if (!href) continue
     entries.push({
       url: `${siteUrl}${href}`,
-      lastModified: project._updatedAt,
+      lastModified: caseStudy._updatedAt,
       changeFrequency: 'monthly',
       priority: 0.7,
     })

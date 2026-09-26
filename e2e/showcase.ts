@@ -1,14 +1,14 @@
 import {expect, type Page} from '@playwright/test'
 
-export type ShowcaseProject = {href: string; slug: string; title: string}
+export type ShowcaseCaseStudy = {href: string; slug: string; title: string}
 
 export function visibleTitle(page: Page, title: string) {
   return page.getByTestId('page-title').filter({hasText: title, visible: true})
 }
 
-export async function readShowcaseProjects(page: Page): Promise<ShowcaseProject[]> {
+export async function readShowcaseCaseStudies(page: Page): Promise<ShowcaseCaseStudy[]> {
   await page.goto('/')
-  const links = page.locator('a[href^="/projects/"]')
+  const links = page.locator('a[href^="/case-studies/"]')
   await expect(links.first()).toBeVisible({timeout: 20000})
   const raw = await links.evaluateAll((els) =>
     els.map((el) => {
@@ -23,13 +23,13 @@ export async function readShowcaseProjects(page: Page): Promise<ShowcaseProject[
     }),
   )
   const seen = new Set<string>()
-  return raw.filter((project) => {
-    if (!project.slug || seen.has(project.slug)) return false
-    seen.add(project.slug)
+  return raw.filter((caseStudy) => {
+    if (!caseStudy.slug || seen.has(caseStudy.slug)) return false
+    seen.add(caseStudy.slug)
     return true
   })
 }
 
-export function projectUrlPattern(href: string) {
+export function caseStudyUrlPattern(href: string) {
   return new RegExp(`${href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\?|$)`)
 }

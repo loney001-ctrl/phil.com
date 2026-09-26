@@ -26,8 +26,8 @@ export function resolveHref(documentType?: string, slug?: string | null): string
       return '/'
     case 'page':
       return slug ? `/${slug}` : undefined
-    case 'project':
-      return slug ? `/projects/${slug}` : undefined
+    case 'caseStudy':
+      return slug ? `/case-studies/${slug}` : undefined
     case 'post':
       return slug ? `/blog/${slug}` : undefined
     default:

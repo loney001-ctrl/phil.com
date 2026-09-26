@@ -20,32 +20,32 @@ import {urlForOpenGraphImage} from '@/sanity/lib/utils'
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({
     query: slugsByTypeQuery,
-    params: {type: 'project'} satisfies SlugsByTypeQueryParams,
+    params: {type: 'caseStudy'} satisfies SlugsByTypeQueryParams,
   })
   if (data.length > 0) {
     return data
   }
   // Cache Components requires `generateStaticParams` to return at least one param — an empty
   // array fails the build (https://nextjs.org/docs/messages/empty-generate-static-params).
-  // With no project documents in the dataset yet, prerender a placeholder slug that resolves
-  // to the 404 page instead.
+  // With no case study documents in the dataset yet, prerender a placeholder slug that
+  // resolves to the 404 page instead.
   return [{slug: '__placeholder__'}]
 }
 
 export async function generateMetadata(
-  {params}: PageProps<'/projects/[slug]'>,
+  {params}: PageProps<'/case-studies/[slug]'>,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const [{slug}, {perspective}] = await Promise.all([params, getDynamicFetchOptions()])
-  const projectSlugPageMetadataQuery = defineQuery(`
-    *[_type == "project" && slug.current == $slug][0] {
+  const caseStudySlugPageMetadataQuery = defineQuery(`
+    *[_type == "caseStudy" && slug.current == $slug][0] {
       coverImage,
       title,
       "overview": pt::text(overview),
     }
   `)
   const {data} = await sanityFetchMetadata({
-    query: projectSlugPageMetadataQuery,
+    query: caseStudySlugPageMetadataQuery,
     params: {slug},
     perspective,
   })
@@ -58,19 +58,19 @@ export async function generateMetadata(
   }
 }
 
-export default async function ProjectSlugPage({params}: PageProps<'/projects/[slug]'>) {
+export default async function CaseStudySlugPage({params}: PageProps<'/case-studies/[slug]'>) {
   const [{slug}, {perspective, stega}] = await Promise.all([params, getDynamicFetchOptions()])
-  return <CachedProjectSlugPage slug={slug} perspective={perspective} stega={stega} />
+  return <CachedCaseStudySlugPage slug={slug} perspective={perspective} stega={stega} />
 }
 
-async function CachedProjectSlugPage({
+async function CachedCaseStudySlugPage({
   slug,
   perspective,
   stega,
-}: Awaited<PageProps<'/projects/[slug]'>['params']> & DynamicFetchOptions) {
+}: Awaited<PageProps<'/case-studies/[slug]'>['params']> & DynamicFetchOptions) {
   'use cache'
-  const projectSlugPageQuery = defineQuery(`
-    *[_type == "project" && slug.current == $slug][0] {
+  const caseStudySlugPageQuery = defineQuery(`
+    *[_type == "caseStudy" && slug.current == $slug][0] {
       _id,
       _type,
       client,
@@ -85,7 +85,7 @@ async function CachedProjectSlugPage({
     }
   `)
   const {data} = await sanityFetch({
-    query: projectSlugPageQuery,
+    query: caseStudySlugPageQuery,
     params: {slug},
     perspective,
     stega,
@@ -108,7 +108,7 @@ async function CachedProjectSlugPage({
   const endYear = duration?.end ? new Date(duration?.end).getFullYear() : 'Now'
 
   return (
-    <div className="space-y-6" data-testid="project-content">
+    <div className="space-y-6" data-testid="case-study-content">
       {/* Header */}
       <Header
         id={data?._id || null}

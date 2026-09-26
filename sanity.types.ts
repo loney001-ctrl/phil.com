@@ -57,9 +57,9 @@ export type Milestone = {
   duration?: Duration
 }
 
-export type Project = {
+export type CaseStudy = {
   _id: string
-  _type: 'project'
+  _type: 'caseStudy'
   _createdAt: string
   _updatedAt: string
   _rev: string
@@ -357,11 +357,11 @@ export type PostReference = {
   [internalGroqTypeReferenceTo]?: 'post'
 }
 
-export type ProjectReference = {
+export type CaseStudyReference = {
   _ref: string
   _type: 'reference'
   _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'project'
+  [internalGroqTypeReferenceTo]?: 'caseStudy'
 }
 
 export type Settings = {
@@ -370,7 +370,7 @@ export type Settings = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  menuItems?: ArrayOf<HomeReference | PageReference | PostReference | ProjectReference>
+  menuItems?: ArrayOf<HomeReference | PageReference | PostReference | CaseStudyReference>
   footer?: Array<{
     children?: Array<{
       marks?: Array<string>
@@ -423,10 +423,10 @@ export type Home = {
     _type: 'block'
     _key: string
   }>
-  showcaseProjects?: Array<
+  showcaseCaseStudies?: Array<
     {
       _key: string
-    } & ProjectReference
+    } & CaseStudyReference
   >
 }
 
@@ -531,7 +531,7 @@ export type AllSanitySchemaTypes =
   | Timeline
   | SanityImageAssetReference
   | Milestone
-  | Project
+  | CaseStudy
   | SanityImageCrop
   | SanityImageHotspot
   | Duration
@@ -545,7 +545,7 @@ export type AllSanitySchemaTypes =
   | HomeReference
   | PageReference
   | PostReference
-  | ProjectReference
+  | CaseStudyReference
   | Settings
   | Home
   | SanityImagePaletteSwatch
@@ -736,36 +736,10 @@ export type BlogIndexQueryResult = Array<{
   }> | null
 }>
 
-// Source: app/(website)/layout.tsx
-// Variable: layoutMetadataQuery
-// Query: {    "settings": *[_type == "settings"][0]{ogImage},    "home": *[_type == "home"][0]{      title,      "overview": pt::text(overview),    }  }
-export type LayoutMetadataQueryResult = {
-  settings: {
-    ogImage: {
-      asset?: SanityImageAssetReference
-      media?: unknown
-      hotspot?: SanityImageHotspot
-      crop?: SanityImageCrop
-      _type: 'image'
-    } | null
-  } | null
-  home: {
-    title: string | null
-    overview: string
-  } | null
-}
-
-// Source: app/(website)/layout.tsx
-// Variable: homeTitleQuery
-// Query: *[_type == "home"][0]{title}
-export type HomeTitleQueryResult = {
-  title: string | null
-} | null
-
-// Source: app/(website)/projects/[slug]/page.tsx
-// Variable: projectSlugPageMetadataQuery
-// Query: *[_type == "project" && slug.current == $slug][0] {      coverImage,      title,      "overview": pt::text(overview),    }
-export type ProjectSlugPageMetadataQueryResult = {
+// Source: app/(website)/case-studies/[slug]/page.tsx
+// Variable: caseStudySlugPageMetadataQuery
+// Query: *[_type == "caseStudy" && slug.current == $slug][0] {      coverImage,      title,      "overview": pt::text(overview),    }
+export type CaseStudySlugPageMetadataQueryResult = {
   coverImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -777,12 +751,12 @@ export type ProjectSlugPageMetadataQueryResult = {
   overview: string
 } | null
 
-// Source: app/(website)/projects/[slug]/page.tsx
-// Variable: projectSlugPageQuery
-// Query: *[_type == "project" && slug.current == $slug][0] {      _id,      _type,      client,      coverImage,      description,      duration,      overview,      site,      "slug": slug.current,      tags,      title,    }
-export type ProjectSlugPageQueryResult = {
+// Source: app/(website)/case-studies/[slug]/page.tsx
+// Variable: caseStudySlugPageQuery
+// Query: *[_type == "caseStudy" && slug.current == $slug][0] {      _id,      _type,      client,      coverImage,      description,      duration,      overview,      site,      "slug": slug.current,      tags,      title,    }
+export type CaseStudySlugPageQueryResult = {
   _id: string
-  _type: 'project'
+  _type: 'caseStudy'
   client: string | null
   coverImage: {
     asset?: SanityImageAssetReference
@@ -845,15 +819,41 @@ export type ProjectSlugPageQueryResult = {
   title: string | null
 } | null
 
+// Source: app/(website)/layout.tsx
+// Variable: layoutMetadataQuery
+// Query: {    "settings": *[_type == "settings"][0]{ogImage},    "home": *[_type == "home"][0]{      title,      "overview": pt::text(overview),    }  }
+export type LayoutMetadataQueryResult = {
+  settings: {
+    ogImage: {
+      asset?: SanityImageAssetReference
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    } | null
+  } | null
+  home: {
+    title: string | null
+    overview: string
+  } | null
+}
+
+// Source: app/(website)/layout.tsx
+// Variable: homeTitleQuery
+// Query: *[_type == "home"][0]{title}
+export type HomeTitleQueryResult = {
+  title: string | null
+} | null
+
 // Source: app/sitemap.ts
 // Variable: query
-// Query: {    "pages": *[_type == "page" && defined(slug.current)]{"slug": slug.current, _updatedAt},    "projects": *[_type == "project" && defined(slug.current)]{"slug": slug.current, _updatedAt},    "posts": *[_type == "post" && defined(slug.current) && !noIndex]{"slug": slug.current, _updatedAt, publishedAt},  }
+// Query: {    "pages": *[_type == "page" && defined(slug.current)]{"slug": slug.current, _updatedAt},    "caseStudies": *[_type == "caseStudy" && defined(slug.current)]{"slug": slug.current, _updatedAt},    "posts": *[_type == "post" && defined(slug.current) && !noIndex]{"slug": slug.current, _updatedAt, publishedAt},  }
 export type QueryResult = {
   pages: Array<{
     slug: string | null
     _updatedAt: string
   }>
-  projects: Array<{
+  caseStudies: Array<{
     slug: string | null
     _updatedAt: string
   }>
@@ -891,6 +891,12 @@ export type SettingsQueryResult = {
   menuItems: Array<
     | {
         _key: null
+        _type: 'caseStudy'
+        slug: string | null
+        title: string | null
+      }
+    | {
+        _key: null
         _type: 'home'
         slug: null
         title: string | null
@@ -904,12 +910,6 @@ export type SettingsQueryResult = {
     | {
         _key: null
         _type: 'post'
-        slug: string | null
-        title: string | null
-      }
-    | {
-        _key: null
-        _type: 'project'
         slug: string | null
         title: string | null
       }
@@ -938,11 +938,11 @@ declare global {
     '\n    *[_type == "post" && slug.current == $slug][0] {\n      title,\n      overview,\n      mainImage,\n      canonicalUrl,\n      noIndex,\n      publishedAt,\n      "authorName": author->name,\n    }\n  ': PostMetadataQueryResult
     '\n    *[_type == "post" && slug.current == $slug][0] {\n      _id,\n      _type,\n      title,\n      overview,\n      body,\n      mainImage,\n      publishedAt,\n      "slug": slug.current,\n      "author": author->{name, role, image, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': PostQueryResult
     '\n    *[_type == "post" && !(_id in path("drafts.**")) && !noIndex] | order(publishedAt desc) {\n      _id,\n      _type,\n      "slug": slug.current,\n      title,\n      overview,\n      mainImage,\n      publishedAt,\n      "author": author->{name, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': BlogIndexQueryResult
+    '\n    *[_type == "caseStudy" && slug.current == $slug][0] {\n      coverImage,\n      title,\n      "overview": pt::text(overview),\n    }\n  ': CaseStudySlugPageMetadataQueryResult
+    '\n    *[_type == "caseStudy" && slug.current == $slug][0] {\n      _id,\n      _type,\n      client,\n      coverImage,\n      description,\n      duration,\n      overview,\n      site,\n      "slug": slug.current,\n      tags,\n      title,\n    }\n  ': CaseStudySlugPageQueryResult
     '{\n    "settings": *[_type == "settings"][0]{ogImage},\n    "home": *[_type == "home"][0]{\n      title,\n      "overview": pt::text(overview),\n    }\n  }': LayoutMetadataQueryResult
     '*[_type == "home"][0]{title}': HomeTitleQueryResult
-    '\n    *[_type == "project" && slug.current == $slug][0] {\n      coverImage,\n      title,\n      "overview": pt::text(overview),\n    }\n  ': ProjectSlugPageMetadataQueryResult
-    '\n    *[_type == "project" && slug.current == $slug][0] {\n      _id,\n      _type,\n      client,\n      coverImage,\n      description,\n      duration,\n      overview,\n      site,\n      "slug": slug.current,\n      tags,\n      title,\n    }\n  ': ProjectSlugPageQueryResult
-    '{\n    "pages": *[_type == "page" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n    "projects": *[_type == "project" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n    "posts": *[_type == "post" && defined(slug.current) && !noIndex]{"slug": slug.current, _updatedAt, publishedAt},\n  }': QueryResult
+    '{\n    "pages": *[_type == "page" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n    "caseStudies": *[_type == "caseStudy" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n    "posts": *[_type == "post" && defined(slug.current) && !noIndex]{"slug": slug.current, _updatedAt, publishedAt},\n  }': QueryResult
     '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    menuItems[]{\n      _key,\n      ...@->{\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    ogImage,\n  }\n': SettingsQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
   }

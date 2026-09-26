@@ -200,7 +200,7 @@
     }
   },
   {
-    "name": "project",
+    "name": "caseStudy",
     "type": "document",
     "attributes": {
       "_id": {
@@ -213,7 +213,7 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "project"
+          "value": "caseStudy"
         }
       },
       "_createdAt": {
@@ -2168,7 +2168,7 @@
   },
   {
     "type": "type",
-    "name": "project.reference",
+    "name": "caseStudy.reference",
     "value": {
       "type": "object",
       "attributes": {
@@ -2193,7 +2193,7 @@
           "optional": true
         }
       },
-      "dereferencesTo": "project"
+      "dereferencesTo": "caseStudy"
     }
   },
   {
@@ -2252,7 +2252,7 @@
               },
               {
                 "type": "inline",
-                "name": "project.reference"
+                "name": "caseStudy.reference"
               }
             ]
           }
@@ -2671,7 +2671,7 @@
         },
         "optional": true
       },
-      "showcaseProjects": {
+      "showcaseCaseStudies": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
@@ -2687,7 +2687,7 @@
             },
             "rest": {
               "type": "inline",
-              "name": "project.reference"
+              "name": "caseStudy.reference"
             }
           }
         },

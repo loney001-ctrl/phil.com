@@ -1,24 +1,26 @@
 import {instant} from '@next/playwright'
 import {expect, test} from '@playwright/test'
 
-import {projectUrlPattern, readShowcaseProjects, visibleTitle} from './showcase'
+import {caseStudyUrlPattern, readShowcaseCaseStudies, visibleTitle} from './showcase'
 
 const VIEWPORTS = [
   {width: 1280, height: 800},
   {width: 390, height: 844},
 ] as const
 
-test.describe('instant nav to a project page', () => {
-  test('project header and footer commit under instant()', async ({page}) => {
-    const projects = await readShowcaseProjects(page)
-    expect(projects.length, 'homepage showcase needs a project link').toBeGreaterThanOrEqual(1)
-    const destination = projects.length > 1 ? projects[1] : projects[0]
-    const origin = projects[0]
+test.describe('instant nav to a case study page', () => {
+  test('case study header and footer commit under instant()', async ({page}) => {
+    const caseStudies = await readShowcaseCaseStudies(page)
+    expect(caseStudies.length, 'homepage showcase needs a case study link').toBeGreaterThanOrEqual(
+      1,
+    )
+    const destination = caseStudies.length > 1 ? caseStudies[1] : caseStudies[0]
+    const origin = caseStudies[0]
 
     await page.goto(origin.href)
     await expect(page.getByTestId('site-header')).toBeVisible({timeout: 20000})
 
-    const navTrigger = page.getByTestId(`nav-link-projects-${destination.slug}`)
+    const navTrigger = page.getByTestId(`nav-link-case-studies-${destination.slug}`)
     const trigger = (await navTrigger.isVisible())
       ? navTrigger
       : page.locator(`a[href="${destination.href}"]`).first()
@@ -30,7 +32,7 @@ test.describe('instant nav to a project page', () => {
 
     await instant(page, async () => {
       await trigger.click()
-      await expect(page).toHaveURL(projectUrlPattern(destination.href))
+      await expect(page).toHaveURL(caseStudyUrlPattern(destination.href))
       for (const viewport of VIEWPORTS) {
         await page.setViewportSize(viewport)
         await expect(page.getByTestId('site-header')).toBeVisible()

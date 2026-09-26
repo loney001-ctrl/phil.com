@@ -34,7 +34,7 @@ export function Navbar(props: NavbarProps) {
           return (
             <AppLink
               key={menuItem._key}
-              // `/[slug]` and `/projects/[slug]` read URL data, which the shared App Shell
+              // `/[slug]` and `/case-studies/[slug]` read URL data, which the shared App Shell
               // can't carry. Runtime prefetching resolves their cached content per link so
               // navigation stays instant. See:
               // https://nextjs.org/docs/app/guides/runtime-prefetching

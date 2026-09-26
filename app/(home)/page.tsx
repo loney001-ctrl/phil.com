@@ -25,10 +25,10 @@ export default function HomePage() {
             </a>
             <a
               href="#contact"
-              className="a rounded-md px-4 py-3 text-xs font-extrabold tracking-[0.06em] text-[#F5F5F7] no-underline md:px-5 md:text-sm"
+              className="a rounded-full px-4 py-3 text-xs font-extrabold tracking-[0.06em] text-[#F5F5F7] no-underline md:px-5 md:text-sm"
               style={{background: PRIMARY}}
             >
-              WORK WITH ME
+              SUBSCRIBE
             </a>
           </div>
         </nav>
