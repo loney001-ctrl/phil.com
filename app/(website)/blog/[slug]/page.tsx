@@ -3,7 +3,6 @@ import {createDataAttribute, defineQuery} from 'next-sanity'
 import {notFound} from 'next/navigation'
 
 import {CustomPortableText} from '@/components/CustomPortableText'
-import {Header} from '@/components/Header'
 import ImageBox from '@/components/ImageBox'
 import {siteUrl, studioUrl} from '@/sanity/lib/api'
 import {
@@ -15,6 +14,9 @@ import {
 } from '@/sanity/lib/live'
 import {slugsByTypeQuery, type SlugsByTypeQueryParams} from '@/sanity/lib/queries'
 import {resolveHref, urlForImage, urlForOpenGraphImage} from '@/sanity/lib/utils'
+
+const PRIMARY = '#1E3BC8'
+const ACCENT = '#B8FF00'
 
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({
@@ -120,48 +122,67 @@ async function CachedBlogSlugPage({
   }
 
   return (
-    <article className="space-y-8" data-testid="post-content">
+    <article className="space-y-10 py-2 md:py-6" data-testid="post-content">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
       />
-      <Header id={data._id} type={data._type} path={['overview']} centered title={title} />
 
-      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-gray-500">
-        {publishedAt && (
-          <time dateTime={publishedAt}>
-            {new Date(publishedAt).toLocaleDateString('en-AU', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            })}
-          </time>
-        )}
-        {author?.name && (
-          <>
-            <span aria-hidden>·</span>
-            <span className="flex items-center gap-2">
-              {authorImageUrl && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={authorImageUrl}
-                  alt={author.name}
-                  width={24}
-                  height={24}
-                  className="rounded-full"
-                />
-              )}
-              {author.name}
-              {author.role ? `, ${author.role}` : ''}
-            </span>
-          </>
-        )}
+      <div className="mx-auto max-w-3xl">
         {categories && categories.length > 0 && (
-          <>
-            <span aria-hidden>·</span>
-            <span>{categories.map((c) => c.title).join(', ')}</span>
-          </>
+          <div className="mb-4 flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <span
+                key={category.slug || category.title}
+                className="a rounded-full px-3 py-1 text-xs font-extrabold tracking-[0.06em] text-[#0A0A0A]"
+                style={{background: ACCENT}}
+              >
+                {category.title?.toUpperCase()}
+              </span>
+            ))}
+          </div>
         )}
+
+        <h1
+          className="a text-4xl font-black leading-[0.95] tracking-[-0.03em] md:text-6xl"
+          data-testid="page-title"
+          data-sanity={dataAttribute?.('title')}
+        >
+          {title}
+        </h1>
+
+        <div className="r mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-base text-[#6B6B72]">
+          {publishedAt && (
+            <time dateTime={publishedAt}>
+              {new Date(publishedAt).toLocaleDateString('en-AU', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </time>
+          )}
+          {author?.name && (
+            <>
+              <span aria-hidden style={{color: PRIMARY}}>
+                ·
+              </span>
+              <span className="flex items-center gap-2">
+                {authorImageUrl && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={authorImageUrl}
+                    alt={author.name}
+                    width={28}
+                    height={28}
+                    className="rounded-full"
+                  />
+                )}
+                {author.name}
+                {author.role ? `, ${author.role}` : ''}
+              </span>
+            </>
+          )}
+        </div>
       </div>
 
       {mainImage && (
@@ -169,12 +190,12 @@ async function CachedBlogSlugPage({
           data-sanity={dataAttribute?.('mainImage')}
           image={mainImage}
           alt={title || ''}
-          classesWrapper="relative mx-auto aspect-[16/9] max-w-4xl"
+          classesWrapper="relative mx-auto aspect-[16/9] max-w-4xl overflow-hidden rounded-3xl"
         />
       )}
 
       {overview && (
-        <p className="mx-auto max-w-3xl text-center font-serif text-xl text-gray-600 md:text-2xl">
+        <p className="r mx-auto max-w-3xl text-xl leading-relaxed text-[#3A3A40] md:text-2xl">
           {overview}
         </p>
       )}

@@ -13,3 +13,15 @@
 .home-page .r {
   font-family: var(--font-home-serif), Georgia, serif;
 }
+
+/*
+ * Same brand typefaces, scoped under .blog-page for the /blog index and post templates.
+ * Kept as a separate scope (rather than sharing .home-page) so the homepage and blog can
+ * evolve independently — see app/(website)/blog/layout.tsx.
+ */
+.blog-page .a {
+  font-family: var(--font-blog-display), 'Helvetica Neue', sans-serif;
+}
+.blog-page .r {
+  font-family: var(--font-blog-serif), Georgia, serif;
+}
