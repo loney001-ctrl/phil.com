@@ -8,24 +8,29 @@ export default function HomePage() {
       <header className="px-5 pt-6 md:px-10 md:pt-8 lg:px-20">
         <nav
           aria-label="Primary"
-          className="flex flex-wrap items-center justify-between gap-4 rounded-full border-[1.5px] border-[#0A0A0A] bg-[#F5F5F7] py-2.5 pl-5 pr-2.5 md:pl-7"
+          className="flex items-center justify-between gap-4 rounded-full border-[1.5px] border-[#0A0A0A] bg-[#F5F5F7] py-2.5 pl-5 pr-2.5 md:pl-7"
         >
-          <a href="#top" className="a text-lg font-black tracking-[-0.01em] no-underline">
+          <a
+            href="#top"
+            className="a shrink-0 text-base font-black tracking-[-0.01em] no-underline md:text-lg"
+          >
             PHIL LONEY
           </a>
-          <div className="flex flex-wrap items-center gap-4 md:gap-9">
-            <a href="#work" className="r text-base no-underline md:text-lg">
-              Case files
-            </a>
-            <a href="#method" className="r text-base no-underline md:text-lg">
-              Method
-            </a>
-            <a href="#systems" className="r text-base no-underline md:text-lg">
-              Systems
-            </a>
+          <div className="flex items-center gap-4 md:gap-9">
+            <div className="hidden items-center gap-4 md:flex md:gap-9">
+              <a href="#work" className="r text-base no-underline md:text-lg">
+                Case files
+              </a>
+              <a href="#method" className="r text-base no-underline md:text-lg">
+                Method
+              </a>
+              <a href="#systems" className="r text-base no-underline md:text-lg">
+                Systems
+              </a>
+            </div>
             <a
               href="#contact"
-              className="a rounded-full px-4 py-3 text-xs font-extrabold tracking-[0.06em] text-[#F5F5F7] no-underline md:px-5 md:text-sm"
+              className="a shrink-0 rounded-full px-4 py-3 text-xs font-extrabold tracking-[0.06em] text-[#F5F5F7] no-underline md:px-5 md:text-sm"
               style={{background: PRIMARY}}
             >
               SUBSCRIBE
@@ -440,7 +445,7 @@ export default function HomePage() {
             <div className="grid grid-cols-2 gap-4 md:gap-6">
               <div className="flex flex-col gap-3 border-t-[1.5px] border-[#F5F5F7] pt-5">
                 <span
-                  className="a text-6xl font-black leading-[0.82] tracking-[-0.06em] md:text-8xl lg:text-[168px]"
+                  className="a text-5xl font-black leading-[0.82] tracking-[-0.06em] md:text-8xl lg:text-[168px]"
                   style={{color: ACCENT}}
                 >
                   400+
@@ -448,7 +453,7 @@ export default function HomePage() {
                 <span className="r text-base text-[#D6D6DB] md:text-lg">case studies</span>
               </div>
               <div className="flex flex-col gap-3 border-t-[1.5px] border-[#F5F5F7] pt-5">
-                <span className="a text-6xl font-black leading-[0.82] tracking-[-0.06em] md:text-8xl lg:text-[168px]">
+                <span className="a text-5xl font-black leading-[0.82] tracking-[-0.06em] md:text-8xl lg:text-[168px]">
                   200+
                 </span>
                 <span className="r text-base text-[#D6D6DB] md:text-lg">founder interviews</span>
