@@ -16,9 +16,23 @@ export const mainDocuments = defineDocuments([
     route: '/blog/:slug',
     filter: `_type == "post" && slug.current == $slug`,
   },
+  // Nested pages: the last segment is the page's own slug. Up to MAX_PAGE_DEPTH (5) levels.
+  {route: '/:slug', filter: `_type == "page" && slug.current == $slug`},
   {
-    route: '/:slug',
-    filter: `_type == "page" && slug.current == $slug`,
+    route: '/:p1/:slug',
+    filter: `_type == "page" && slug.current == $slug && parent->slug.current == $p1`,
+  },
+  {
+    route: '/:p1/:p2/:slug',
+    filter: `_type == "page" && slug.current == $slug && parent->slug.current == $p2 && parent->parent->slug.current == $p1`,
+  },
+  {
+    route: '/:p1/:p2/:p3/:slug',
+    filter: `_type == "page" && slug.current == $slug && parent->slug.current == $p3 && parent->parent->slug.current == $p2`,
+  },
+  {
+    route: '/:p1/:p2/:p3/:p4/:slug',
+    filter: `_type == "page" && slug.current == $slug && parent->slug.current == $p4 && parent->parent->slug.current == $p3`,
   },
 ])
 
@@ -44,15 +58,20 @@ export const locations = {
     }),
   }),
   page: defineLocations({
-    select: {title: 'title', slug: 'slug.current'},
-    resolve: (doc) => ({
-      locations: [
-        {
-          title: doc?.title || 'Untitled',
-          href: resolveHref('page', doc?.slug)!,
-        },
-      ],
-    }),
+    select: {
+      title: 'title',
+      slug: 'slug.current',
+      p1: 'parent.slug.current',
+      p2: 'parent.parent.slug.current',
+      p3: 'parent.parent.parent.slug.current',
+      p4: 'parent.parent.parent.parent.slug.current',
+    },
+    resolve: (doc) => {
+      const path = [doc?.p4, doc?.p3, doc?.p2, doc?.p1, doc?.slug].filter(Boolean).join('/')
+      return {
+        locations: [{title: doc?.title || 'Untitled', href: resolveHref('page', path)!}],
+      }
+    },
   }),
   post: defineLocations({
     select: {title: 'title', slug: 'slug.current'},

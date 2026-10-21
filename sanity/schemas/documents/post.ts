@@ -7,14 +7,20 @@ export default defineType({
   title: 'Post',
   type: 'document',
   icon: DocumentIcon,
+  groups: [
+    {name: 'content', title: 'Content', default: true},
+    {name: 'seo', title: 'SEO'},
+  ],
   fields: [
     defineField({
+      group: 'content',
       name: 'title',
       title: 'Title',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -26,6 +32,7 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'author',
       title: 'Author',
       type: 'reference',
@@ -33,18 +40,21 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'categories',
       title: 'Categories',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'category'}]}],
     }),
     defineField({
+      group: 'content',
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'mainImage',
       title: 'Cover image',
       description:
@@ -62,6 +72,7 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'overview',
       title: 'Excerpt',
       description:
@@ -71,6 +82,7 @@ export default defineType({
       validation: (rule) => rule.max(155).required(),
     }),
     defineField({
+      group: 'content',
       name: 'body',
       title: 'Body',
       type: 'array',
@@ -118,25 +130,14 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'featured',
       title: 'Featured',
       description: 'Featured posts can be surfaced first on the homepage/blog index.',
       type: 'boolean',
       initialValue: false,
     }),
-    defineField({
-      name: 'canonicalUrl',
-      title: 'Canonical URL',
-      description:
-        'Only set this if this post is a cross-post/syndication and the canonical lives elsewhere.',
-      type: 'url',
-    }),
-    defineField({
-      name: 'noIndex',
-      title: 'Hide from search engines',
-      type: 'boolean',
-      initialValue: false,
-    }),
+    defineField({name: 'seo', title: 'SEO', type: 'seo', group: 'seo'}),
   ],
   preview: {
     select: {

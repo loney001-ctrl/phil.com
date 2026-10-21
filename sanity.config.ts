@@ -15,8 +15,11 @@ import caseStudy from '@/sanity/schemas/documents/caseStudy'
 import category from '@/sanity/schemas/documents/category'
 import page from '@/sanity/schemas/documents/page'
 import post from '@/sanity/schemas/documents/post'
+import redirect from '@/sanity/schemas/documents/redirect'
 import duration from '@/sanity/schemas/objects/duration'
+import footerLink from '@/sanity/schemas/objects/footerLink'
 import milestone from '@/sanity/schemas/objects/milestone'
+import seo from '@/sanity/schemas/objects/seo'
 import timeline from '@/sanity/schemas/objects/timeline'
 import home from '@/sanity/schemas/singletons/home'
 import settings from '@/sanity/schemas/singletons/settings'
@@ -45,9 +48,12 @@ export default defineConfig({
       page,
       post,
       caseStudy,
+      redirect,
       // Objects
       milestone,
       timeline,
+      seo,
+      footerLink,
     ],
   },
   plugins: [

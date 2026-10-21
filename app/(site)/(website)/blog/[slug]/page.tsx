@@ -1,10 +1,13 @@
 import type {Metadata, ResolvingMetadata} from 'next'
-import {createDataAttribute, defineQuery} from 'next-sanity'
+import {createDataAttribute, defineQuery, stegaClean} from 'next-sanity'
 import {notFound} from 'next/navigation'
 
 import {CustomPortableText} from '@/components/CustomPortableText'
+import {PageHeadCode} from '@/components/HeadCode'
 import ImageBox from '@/components/ImageBox'
-import {siteUrl, studioUrl} from '@/sanity/lib/api'
+import {JsonLd} from '@/components/JsonLd'
+import {studioUrl} from '@/sanity/lib/api'
+import {breadcrumbNode, graph, pageNode} from '@/sanity/lib/jsonLd'
 import {
   getDynamicFetchOptions,
   sanityFetch,
@@ -13,7 +16,8 @@ import {
   type DynamicFetchOptions,
 } from '@/sanity/lib/live'
 import {slugsByTypeQuery, type SlugsByTypeQueryParams} from '@/sanity/lib/queries'
-import {resolveHref, urlForImage, urlForOpenGraphImage} from '@/sanity/lib/utils'
+import {buildMetadata, getGlobalSeo} from '@/sanity/lib/seo'
+import {resolveHref, urlForImage} from '@/sanity/lib/utils'
 
 const PRIMARY = '#1E3BC8'
 const ACCENT = '#B8FF00'
@@ -42,27 +46,31 @@ export async function generateMetadata(
       title,
       overview,
       mainImage,
-      canonicalUrl,
-      noIndex,
       publishedAt,
+      _updatedAt,
+      "slug": slug.current,
       "authorName": author->name,
+      seo,
     }
   `)
-  const {data} = await sanityFetchMetadata({query: postMetadataQuery, params: {slug}, perspective})
+  const [{data}, global] = await Promise.all([
+    sanityFetchMetadata({query: postMetadataQuery, params: {slug}, perspective}),
+    getGlobalSeo(perspective),
+  ])
+  if (!data) return {}
 
-  const ogImage = urlForOpenGraphImage(data?.mainImage)
-  return {
-    title: data?.title,
-    description: data?.overview || (await parent).description,
-    alternates: data?.canonicalUrl ? {canonical: data.canonicalUrl} : undefined,
-    robots: data?.noIndex ? {index: false, follow: true} : undefined,
-    authors: data?.authorName ? [{name: data.authorName}] : undefined,
-    openGraph: {
-      type: 'article',
-      publishedTime: data?.publishedAt || undefined,
-      images: ogImage ? [ogImage, ...((await parent).openGraph?.images || [])] : [],
-    },
-  }
+  return buildMetadata({
+    seo: data.seo,
+    title: data.title,
+    description: data.overview || (await parent).description,
+    image: data.mainImage,
+    path: resolveHref('post', data.slug) || `/blog/${slug}`,
+    global,
+    openGraphType: 'article',
+    publishedTime: data.publishedAt,
+    modifiedTime: data._updatedAt,
+    authors: data.authorName ? [data.authorName] : undefined,
+  })
 }
 
 export default async function BlogSlugPage({params}: PageProps<'/blog/[slug]'>) {
@@ -85,6 +93,8 @@ async function CachedBlogSlugPage({
       body,
       mainImage,
       publishedAt,
+      _updatedAt,
+      seo,
       "slug": slug.current,
       "author": author->{name, role, image, "slug": slug.current},
       "categories": categories[]->{title, "slug": slug.current},
@@ -105,28 +115,39 @@ async function CachedBlogSlugPage({
     ? urlForImage(author.image)?.width(96).height(96).fit('crop').url()
     : undefined
 
-  const postUrl = `${siteUrl}${resolveHref('post', data.slug) || ''}`
+  const postPath = resolveHref('post', stegaClean(data.slug)) || '/blog'
   const schemaImageUrl = mainImage
     ? urlForImage(mainImage)?.width(1200).height(630).fit('crop').url()
     : undefined
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    'headline': title,
-    'description': overview,
-    'image': schemaImageUrl ? [schemaImageUrl] : undefined,
-    'datePublished': publishedAt || undefined,
-    'dateModified': publishedAt || undefined,
-    'mainEntityOfPage': {'@type': 'WebPage', '@id': postUrl},
-    'author': author?.name ? {'@type': 'Person', 'name': author.name} : undefined,
-  }
+  const jsonLd = graph([
+    breadcrumbNode(
+      [
+        {name: 'Blog', path: '/blog'},
+        {
+          name: stegaClean(data.seo?.breadcrumbTitle) || stegaClean(title) || 'Post',
+          path: postPath,
+        },
+      ],
+      postPath,
+    ),
+    ...pageNode({
+      seo: data.seo,
+      defaultType: 'BlogPosting',
+      path: postPath,
+      title: stegaClean(title) || '',
+      description: data.seo?.metaDescription || overview,
+      image: schemaImageUrl,
+      datePublished: publishedAt,
+      dateModified: data._updatedAt,
+      authorName: author?.name,
+      hasBreadcrumb: true,
+    }),
+  ])
 
   return (
     <article className="space-y-10 py-2 md:py-6" data-testid="post-content">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
-      />
+      <JsonLd data={jsonLd} />
+      <PageHeadCode code={data.seo?.headCode} id={data._id} />
 
       <div className="mx-auto max-w-3xl">
         {categories && categories.length > 0 && (

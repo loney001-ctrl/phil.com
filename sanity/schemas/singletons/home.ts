@@ -8,8 +8,13 @@ export default defineType({
   icon: HomeIcon,
   // Uncomment below to have edits publish automatically as you type
   // liveEdit: true,
+  groups: [
+    {name: 'content', title: 'Content', default: true},
+    {name: 'seo', title: 'SEO'},
+  ],
   fields: [
     defineField({
+      group: 'content',
       name: 'title',
       description: 'This field is the title of your personal website.',
       title: 'Title',
@@ -17,6 +22,7 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'overview',
       description:
         'Used both for the <meta> description tag for SEO, and the personal website subheader.',
@@ -59,6 +65,7 @@ export default defineType({
       validation: (rule) => rule.max(155).required(),
     }),
     defineField({
+      group: 'content',
       name: 'showcaseCaseStudies',
       title: 'Showcase case studies',
       description: 'These are the case studies that will appear first on your landing page.',
@@ -70,6 +77,7 @@ export default defineType({
         }),
       ],
     }),
+    defineField({name: 'seo', title: 'SEO', type: 'seo', group: 'seo'}),
   ],
   preview: {
     select: {

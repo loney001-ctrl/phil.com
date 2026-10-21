@@ -21,6 +21,98 @@ type ArrayOf<T> = Array<
 >
 
 // Source: schema.json
+export type PageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'page'
+}
+
+export type PostReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'post'
+}
+
+export type CaseStudyReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'caseStudy'
+}
+
+export type HomeReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'home'
+}
+
+export type FooterLink = {
+  _type: 'footerLink'
+  label?: string
+  linkType?: 'internal' | 'external'
+  internal?: PageReference | PostReference | CaseStudyReference | HomeReference
+  url?: string
+  newTab?: boolean
+}
+
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type Seo = {
+  _type: 'seo'
+  focusKeyword?: string
+  secondaryKeywords?: Array<string>
+  metaTitle?: string
+  metaDescription?: string
+  canonicalUrl?: string
+  noIndex?: boolean
+  noFollow?: boolean
+  noArchive?: boolean
+  noSnippet?: boolean
+  noImageIndex?: boolean
+  maxSnippet?: number
+  maxImagePreview?: 'none' | 'standard' | 'large'
+  maxVideoPreview?: number
+  excludeFromSitemap?: boolean
+  disallowInRobotsTxt?: boolean
+  ogTitle?: string
+  ogDescription?: string
+  ogImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  twitterCard?: 'summary_large_image' | 'summary'
+  schemaType?:
+    | 'WebPage'
+    | 'AboutPage'
+    | 'ContactPage'
+    | 'CollectionPage'
+    | 'ProfilePage'
+    | 'FAQPage'
+    | 'Article'
+    | 'BlogPosting'
+    | 'none'
+  faqs?: Array<{
+    question?: string
+    answer?: string
+    _type: 'faq'
+    _key: string
+  }>
+  breadcrumbTitle?: string
+  headCode?: string
+}
+
 export type Timeline = {
   _type: 'timeline'
   items?: Array<{
@@ -33,13 +125,6 @@ export type Timeline = {
     _type: 'item'
     _key: string
   }>
-}
-
-export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
 export type Milestone = {
@@ -55,6 +140,18 @@ export type Milestone = {
   }
   tags?: Array<string>
   duration?: Duration
+}
+
+export type Redirect = {
+  _id: string
+  _type: 'redirect'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  source?: string
+  destination?: string
+  permanent?: boolean
+  enabled?: boolean
 }
 
 export type CaseStudy = {
@@ -123,6 +220,7 @@ export type CaseStudy = {
         _key: string
       }
   >
+  seo?: Seo
 }
 
 export type SanityImageCrop = {
@@ -222,8 +320,7 @@ export type Post = {
       }
   >
   featured?: boolean
-  canonicalUrl?: string
-  noIndex?: boolean
+  seo?: Seo
 }
 
 export type Page = {
@@ -233,6 +330,7 @@ export type Page = {
   _updatedAt: string
   _rev: string
   title?: string
+  parent?: PageReference
   slug?: Slug
   overview?: Array<{
     children?: Array<{
@@ -256,7 +354,7 @@ export type Page = {
           _type: 'span'
           _key: string
         }>
-        style?: 'normal'
+        style?: 'normal' | 'h2' | 'h3' | 'h4'
         listItem?: 'bullet' | 'number'
         markDefs?: Array<{
           href?: string
@@ -281,6 +379,7 @@ export type Page = {
         _key: string
       }
   >
+  seo?: Seo
 }
 
 export type Category = {
@@ -336,34 +435,6 @@ export type Author = {
   }>
 }
 
-export type HomeReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'home'
-}
-
-export type PageReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'page'
-}
-
-export type PostReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'post'
-}
-
-export type CaseStudyReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'caseStudy'
-}
-
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -389,6 +460,41 @@ export type Settings = {
     _type: 'block'
     _key: string
   }>
+  popularSearches?: {
+    label?: string
+    links?: Array<
+      {
+        _key: string
+      } & FooterLink
+    >
+  }
+  seo?: {
+    siteName?: string
+    titleTemplate?: string
+    defaultDescription?: string
+    twitterHandle?: string
+    discourageSearchEngines?: boolean
+    entity?: {
+      type?: 'Person' | 'Organization'
+      name?: string
+      jobTitle?: string
+      image?: {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      }
+      sameAs?: Array<string>
+    }
+    verification?: {
+      google?: string
+      bing?: string
+      yandex?: string
+      pinterest?: string
+      facebook?: string
+    }
+  }
   ogImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -396,6 +502,9 @@ export type Settings = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  robotsTxt?: string
+  headCode?: string
+  bodyCode?: string
 }
 
 export type Home = {
@@ -428,6 +537,7 @@ export type Home = {
       _key: string
     } & CaseStudyReference
   >
+  seo?: Seo
 }
 
 export type SanityImagePaletteSwatch = {
@@ -528,9 +638,16 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
-  | Timeline
+  | PageReference
+  | PostReference
+  | CaseStudyReference
+  | HomeReference
+  | FooterLink
   | SanityImageAssetReference
+  | Seo
+  | Timeline
   | Milestone
+  | Redirect
   | CaseStudy
   | SanityImageCrop
   | SanityImageHotspot
@@ -542,10 +659,6 @@ export type AllSanitySchemaTypes =
   | Page
   | Category
   | Author
-  | HomeReference
-  | PageReference
-  | PostReference
-  | CaseStudyReference
   | Settings
   | Home
   | SanityImagePaletteSwatch
@@ -557,74 +670,20 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint
 
-// Source: app/(website)/[slug]/page.tsx
-// Variable: slugPageMetadataQuery
-// Query: *[_type == "page" && slug.current == $slug][0] {      title,      "overview": pt::text(overview),    }
-export type SlugPageMetadataQueryResult = {
+// Source: app/(site)/(home)/homeData.ts
+// Variable: homeSeoQuery
+// Query: *[_type == "home"][0]{  _id,  _updatedAt,  title,  "overview": pt::text(overview),  seo,}
+export type HomeSeoQueryResult = {
+  _id: string
+  _updatedAt: string
   title: string | null
   overview: string
+  seo: Seo | null
 } | null
 
-// Source: app/(website)/[slug]/page.tsx
-// Variable: slugPageQuery
-// Query: *[_type == "page" && slug.current == $slug][0] {      _id,      _type,      body,      overview,      title,      "slug": slug.current,    }
-export type SlugPageQueryResult = {
-  _id: string
-  _type: 'page'
-  body: Array<
-    | ({
-        _key: string
-      } & Timeline)
-    | {
-        children?: Array<{
-          marks?: Array<string>
-          text?: string
-          _type: 'span'
-          _key: string
-        }>
-        style?: 'normal'
-        listItem?: 'bullet' | 'number'
-        markDefs?: Array<{
-          href?: string
-          _type: 'link'
-          _key: string
-        }>
-        level?: number
-        _type: 'block'
-        _key: string
-      }
-    | {
-        asset?: SanityImageAssetReference
-        media?: unknown
-        hotspot?: SanityImageHotspot
-        crop?: SanityImageCrop
-        caption?: string
-        alt?: string
-        _type: 'image'
-        _key: string
-      }
-  > | null
-  overview: Array<{
-    children?: Array<{
-      marks?: Array<string>
-      text?: string
-      _type: 'span'
-      _key: string
-    }>
-    style?: 'normal'
-    listItem?: never
-    markDefs?: null
-    level?: number
-    _type: 'block'
-    _key: string
-  }> | null
-  title: string | null
-  slug: string | null
-} | null
-
-// Source: app/(website)/blog/[slug]/page.tsx
+// Source: app/(site)/(website)/blog/[slug]/page.tsx
 // Variable: postMetadataQuery
-// Query: *[_type == "post" && slug.current == $slug][0] {      title,      overview,      mainImage,      canonicalUrl,      noIndex,      publishedAt,      "authorName": author->name,    }
+// Query: *[_type == "post" && slug.current == $slug][0] {      title,      overview,      mainImage,      publishedAt,      _updatedAt,      "slug": slug.current,      "authorName": author->name,      seo,    }
 export type PostMetadataQueryResult = {
   title: string | null
   overview: string | null
@@ -636,15 +695,16 @@ export type PostMetadataQueryResult = {
     alt?: string
     _type: 'image'
   } | null
-  canonicalUrl: string | null
-  noIndex: boolean | null
   publishedAt: string | null
+  _updatedAt: string
+  slug: string | null
   authorName: string | null
+  seo: Seo | null
 } | null
 
-// Source: app/(website)/blog/[slug]/page.tsx
+// Source: app/(site)/(website)/blog/[slug]/page.tsx
 // Variable: postQuery
-// Query: *[_type == "post" && slug.current == $slug][0] {      _id,      _type,      title,      overview,      body,      mainImage,      publishedAt,      "slug": slug.current,      "author": author->{name, role, image, "slug": slug.current},      "categories": categories[]->{title, "slug": slug.current},    }
+// Query: *[_type == "post" && slug.current == $slug][0] {      _id,      _type,      title,      overview,      body,      mainImage,      publishedAt,      _updatedAt,      seo,      "slug": slug.current,      "author": author->{name, role, image, "slug": slug.current},      "categories": categories[]->{title, "slug": slug.current},    }
 export type PostQueryResult = {
   _id: string
   _type: 'post'
@@ -689,6 +749,8 @@ export type PostQueryResult = {
     _type: 'image'
   } | null
   publishedAt: string | null
+  _updatedAt: string
+  seo: Seo | null
   slug: string | null
   author: {
     name: string | null
@@ -708,9 +770,9 @@ export type PostQueryResult = {
   }> | null
 } | null
 
-// Source: app/(website)/blog/page.tsx
+// Source: app/(site)/(website)/blog/page.tsx
 // Variable: blogIndexQuery
-// Query: *[_type == "post" && !(_id in path("drafts.**")) && !noIndex] | order(publishedAt desc) {      _id,      _type,      "slug": slug.current,      title,      overview,      mainImage,      publishedAt,      "author": author->{name, "slug": slug.current},      "categories": categories[]->{title, "slug": slug.current},    }
+// Query: *[_type == "post" && !(_id in path("drafts.**")) && seo.noIndex != true] | order(publishedAt desc) {      _id,      _type,      "slug": slug.current,      title,      overview,      mainImage,      publishedAt,      "author": author->{name, "slug": slug.current},      "categories": categories[]->{title, "slug": slug.current},    }
 export type BlogIndexQueryResult = Array<{
   _id: string
   _type: 'post'
@@ -736,9 +798,9 @@ export type BlogIndexQueryResult = Array<{
   }> | null
 }>
 
-// Source: app/(website)/case-studies/[slug]/page.tsx
+// Source: app/(site)/(website)/case-studies/[slug]/page.tsx
 // Variable: caseStudySlugPageMetadataQuery
-// Query: *[_type == "caseStudy" && slug.current == $slug][0] {      coverImage,      title,      "overview": pt::text(overview),    }
+// Query: *[_type == "caseStudy" && slug.current == $slug][0] {      coverImage,      title,      _updatedAt,      "slug": slug.current,      "overview": pt::text(overview),      seo,    }
 export type CaseStudySlugPageMetadataQueryResult = {
   coverImage: {
     asset?: SanityImageAssetReference
@@ -748,12 +810,15 @@ export type CaseStudySlugPageMetadataQueryResult = {
     _type: 'image'
   } | null
   title: string | null
+  _updatedAt: string
+  slug: string | null
   overview: string
+  seo: Seo | null
 } | null
 
-// Source: app/(website)/case-studies/[slug]/page.tsx
+// Source: app/(site)/(website)/case-studies/[slug]/page.tsx
 // Variable: caseStudySlugPageQuery
-// Query: *[_type == "caseStudy" && slug.current == $slug][0] {      _id,      _type,      client,      coverImage,      description,      duration,      overview,      site,      "slug": slug.current,      tags,      title,    }
+// Query: *[_type == "caseStudy" && slug.current == $slug][0] {      _id,      _type,      client,      coverImage,      description,      duration,      overview,      site,      "slug": slug.current,      "overviewText": pt::text(overview),      tags,      title,      _updatedAt,      seo,    }
 export type CaseStudySlugPageQueryResult = {
   _id: string
   _type: 'caseStudy'
@@ -815,42 +880,52 @@ export type CaseStudySlugPageQueryResult = {
   }> | null
   site: string | null
   slug: string | null
+  overviewText: string
   tags: Array<string> | null
   title: string | null
+  _updatedAt: string
+  seo: Seo | null
 } | null
 
-// Source: app/(website)/layout.tsx
-// Variable: layoutMetadataQuery
-// Query: {    "settings": *[_type == "settings"][0]{ogImage},    "home": *[_type == "home"][0]{      title,      "overview": pt::text(overview),    }  }
-export type LayoutMetadataQueryResult = {
-  settings: {
-    ogImage: {
-      asset?: SanityImageAssetReference
-      media?: unknown
-      hotspot?: SanityImageHotspot
-      crop?: SanityImageCrop
-      _type: 'image'
-    } | null
-  } | null
-  home: {
-    title: string | null
-    overview: string
-  } | null
-}
-
-// Source: app/(website)/layout.tsx
+// Source: app/(site)/(website)/layout.tsx
 // Variable: homeTitleQuery
 // Query: *[_type == "home"][0]{title}
 export type HomeTitleQueryResult = {
   title: string | null
 } | null
 
+// Source: app/robots.txt/route.ts
+// Variable: robotsQuery
+// Query: {  "base": *[_type == "settings"][0].robotsTxt,  "disallow": *[    _type in ["page", "post", "caseStudy"] &&    defined(slug.current) &&    seo.disallowInRobotsTxt == true  ]{    _type,    "path": select(_type == "page" => array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/"), slug.current)  }}
+export type RobotsQueryResult = {
+  base: string | null
+  disallow: Array<
+    | {
+        _type: 'caseStudy'
+        path: string | null
+      }
+    | {
+        _type: 'page'
+        path: string
+      }
+    | {
+        _type: 'post'
+        path: string | null
+      }
+  >
+}
+
 // Source: app/sitemap.ts
 // Variable: query
-// Query: {    "pages": *[_type == "page" && defined(slug.current)]{"slug": slug.current, _updatedAt},    "caseStudies": *[_type == "caseStudy" && defined(slug.current)]{"slug": slug.current, _updatedAt},    "posts": *[_type == "post" && defined(slug.current) && !noIndex]{"slug": slug.current, _updatedAt, publishedAt},  }
+// Query: {    "discourage": *[_type == "settings"][0].seo.discourageSearchEngines == true,    "home": *[_type == "home"][0]{_updatedAt, "hidden": seo.noIndex == true},    "pages": *[_type == "page" && defined(slug.current) && seo.noIndex != true && seo.excludeFromSitemap != true && !defined(seo.canonicalUrl)]{"slug": array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/"), _updatedAt},    "caseStudies": *[_type == "caseStudy" && defined(slug.current) && seo.noIndex != true && seo.excludeFromSitemap != true && !defined(seo.canonicalUrl)]{"slug": slug.current, _updatedAt},    "posts": *[_type == "post" && defined(slug.current) && seo.noIndex != true && seo.excludeFromSitemap != true && !defined(seo.canonicalUrl)]{"slug": slug.current, _updatedAt, publishedAt},  }
 export type QueryResult = {
+  discourage: boolean | false
+  home: {
+    _updatedAt: string
+    hidden: boolean | false
+  } | null
   pages: Array<{
-    slug: string | null
+    slug: string
     _updatedAt: string
   }>
   caseStudies: Array<{
@@ -866,7 +941,7 @@ export type QueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{    _id,    _type,    footer,    menuItems[]{      _key,      ...@->{        _type,        "slug": slug.current,        title      }    },    ogImage,  }
+// Query: *[_type == "settings"][0]{    _id,    _type,    footer,    menuItems[]{      _key,      ...@->{        _type,        "slug": select(_type == "page" => array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/"), slug.current),        title      }    },    popularSearches{      label,      links[]{        _key,        label,        "external": linkType == "external",        url,        newTab,        "internal": internal->{          _type,          title,          "slug": select(_type == "page" => array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/"), slug.current)        }      }    },    ogImage,  }
 export type SettingsQueryResult = {
   _id: string
   _type: 'settings'
@@ -904,7 +979,7 @@ export type SettingsQueryResult = {
     | {
         _key: null
         _type: 'page'
-        slug: string | null
+        slug: string
         title: string | null
       }
     | {
@@ -914,6 +989,38 @@ export type SettingsQueryResult = {
         title: string | null
       }
   > | null
+  popularSearches: {
+    label: string | null
+    links: Array<{
+      _key: string
+      label: string | null
+      external: false | true
+      url: string | null
+      newTab: boolean | null
+      internal:
+        | {
+            _type: 'caseStudy'
+            title: string | null
+            slug: string | null
+          }
+        | {
+            _type: 'home'
+            title: string | null
+            slug: null
+          }
+        | {
+            _type: 'page'
+            title: string | null
+            slug: string
+          }
+        | {
+            _type: 'post'
+            title: string | null
+            slug: string | null
+          }
+        | null
+    }> | null
+  } | null
   ogImage: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -924,27 +1031,159 @@ export type SettingsQueryResult = {
 } | null
 
 // Source: sanity/lib/queries.ts
+// Variable: siteCodeQuery
+// Query: *[_type == "settings"][0]{headCode, bodyCode}
+export type SiteCodeQueryResult = {
+  headCode: string | null
+  bodyCode: string | null
+} | null
+
+// Source: sanity/lib/queries.ts
 // Variable: slugsByTypeQuery
 // Query: *[_type == $type && defined(slug.current)]{"slug": slug.current}
 export type SlugsByTypeQueryResult = Array<{
   slug: string | null
 }>
 
+// Source: sanity/lib/queries.ts
+// Variable: pagePathsQuery
+// Query: *[_type == "page" && defined(slug.current)]{"slug": string::split(array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/"), "/")}
+export type PagePathsQueryResult = Array<{
+  slug: Array<string>
+}>
+
+// Source: sanity/lib/queries.ts
+// Variable: pageByPathQuery
+// Query: *[_type == "page" && slug.current == $last && array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/") == $path][0]{    _id,    _type,    _updatedAt,    body,    overview,    title,    "path": array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/"),    "ancestors": array::compact([  parent->parent->parent->parent->{"title": coalesce(seo.breadcrumbTitle, title), "path": array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/")},  parent->parent->parent->{"title": coalesce(seo.breadcrumbTitle, title), "path": array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/")},  parent->parent->{"title": coalesce(seo.breadcrumbTitle, title), "path": array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/")},  parent->{"title": coalesce(seo.breadcrumbTitle, title), "path": array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/")}]),    seo,  }
+export type PageByPathQueryResult = {
+  _id: string
+  _type: 'page'
+  _updatedAt: string
+  body: Array<
+    | ({
+        _key: string
+      } & Timeline)
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'h2' | 'h3' | 'h4' | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        caption?: string
+        alt?: string
+        _type: 'image'
+        _key: string
+      }
+  > | null
+  overview: Array<{
+    children?: Array<{
+      marks?: Array<string>
+      text?: string
+      _type: 'span'
+      _key: string
+    }>
+    style?: 'normal'
+    listItem?: never
+    markDefs?: null
+    level?: number
+    _type: 'block'
+    _key: string
+  }> | null
+  title: string | null
+  path: string
+  ancestors: Array<{
+    title: string | null
+    path: string
+  }>
+  seo: Seo | null
+} | null
+
+// Source: sanity/lib/queries.ts
+// Variable: pageMetadataByPathQuery
+// Query: *[_type == "page" && slug.current == $last && array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/") == $path][0]{    title,    "overview": pt::text(overview),    "path": array::join(array::compact([  parent->parent->parent->parent->slug.current,  parent->parent->parent->slug.current,  parent->parent->slug.current,  parent->slug.current,  slug.current]), "/"),    seo,  }
+export type PageMetadataByPathQueryResult = {
+  title: string | null
+  overview: string
+  path: string
+  seo: Seo | null
+} | null
+
+// Source: sanity/lib/seo.ts
+// Variable: globalSeoQuery
+// Query: *[_type == "settings"][0]{  ogImage,  seo{    siteName,    titleTemplate,    defaultDescription,    twitterHandle,    discourageSearchEngines,    entity{type, name, jobTitle, image, sameAs},    verification{google, bing, yandex, pinterest, facebook}  }}
+export type GlobalSeoQueryResult = {
+  ogImage: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  } | null
+  seo: {
+    siteName: string | null
+    titleTemplate: string | null
+    defaultDescription: string | null
+    twitterHandle: string | null
+    discourageSearchEngines: boolean | null
+    entity: {
+      type: 'Organization' | 'Person' | null
+      name: string | null
+      jobTitle: string | null
+      image: {
+        asset?: SanityImageAssetReference
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      } | null
+      sameAs: Array<string> | null
+    } | null
+    verification: {
+      google: string | null
+      bing: string | null
+      yandex: string | null
+      pinterest: string | null
+      facebook: string | null
+    } | null
+  } | null
+} | null
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '\n    *[_type == "page" && slug.current == $slug][0] {\n      title,\n      "overview": pt::text(overview),\n    }\n  ': SlugPageMetadataQueryResult
-    '\n    *[_type == "page" && slug.current == $slug][0] {\n      _id,\n      _type,\n      body,\n      overview,\n      title,\n      "slug": slug.current,\n    }\n  ': SlugPageQueryResult
-    '\n    *[_type == "post" && slug.current == $slug][0] {\n      title,\n      overview,\n      mainImage,\n      canonicalUrl,\n      noIndex,\n      publishedAt,\n      "authorName": author->name,\n    }\n  ': PostMetadataQueryResult
-    '\n    *[_type == "post" && slug.current == $slug][0] {\n      _id,\n      _type,\n      title,\n      overview,\n      body,\n      mainImage,\n      publishedAt,\n      "slug": slug.current,\n      "author": author->{name, role, image, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': PostQueryResult
-    '\n    *[_type == "post" && !(_id in path("drafts.**")) && !noIndex] | order(publishedAt desc) {\n      _id,\n      _type,\n      "slug": slug.current,\n      title,\n      overview,\n      mainImage,\n      publishedAt,\n      "author": author->{name, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': BlogIndexQueryResult
-    '\n    *[_type == "caseStudy" && slug.current == $slug][0] {\n      coverImage,\n      title,\n      "overview": pt::text(overview),\n    }\n  ': CaseStudySlugPageMetadataQueryResult
-    '\n    *[_type == "caseStudy" && slug.current == $slug][0] {\n      _id,\n      _type,\n      client,\n      coverImage,\n      description,\n      duration,\n      overview,\n      site,\n      "slug": slug.current,\n      tags,\n      title,\n    }\n  ': CaseStudySlugPageQueryResult
-    '{\n    "settings": *[_type == "settings"][0]{ogImage},\n    "home": *[_type == "home"][0]{\n      title,\n      "overview": pt::text(overview),\n    }\n  }': LayoutMetadataQueryResult
+    '*[_type == "home"][0]{\n  _id,\n  _updatedAt,\n  title,\n  "overview": pt::text(overview),\n  seo,\n}': HomeSeoQueryResult
+    '\n    *[_type == "post" && slug.current == $slug][0] {\n      title,\n      overview,\n      mainImage,\n      publishedAt,\n      _updatedAt,\n      "slug": slug.current,\n      "authorName": author->name,\n      seo,\n    }\n  ': PostMetadataQueryResult
+    '\n    *[_type == "post" && slug.current == $slug][0] {\n      _id,\n      _type,\n      title,\n      overview,\n      body,\n      mainImage,\n      publishedAt,\n      _updatedAt,\n      seo,\n      "slug": slug.current,\n      "author": author->{name, role, image, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': PostQueryResult
+    '\n    *[_type == "post" && !(_id in path("drafts.**")) && seo.noIndex != true] | order(publishedAt desc) {\n      _id,\n      _type,\n      "slug": slug.current,\n      title,\n      overview,\n      mainImage,\n      publishedAt,\n      "author": author->{name, "slug": slug.current},\n      "categories": categories[]->{title, "slug": slug.current},\n    }\n  ': BlogIndexQueryResult
+    '\n    *[_type == "caseStudy" && slug.current == $slug][0] {\n      coverImage,\n      title,\n      _updatedAt,\n      "slug": slug.current,\n      "overview": pt::text(overview),\n      seo,\n    }\n  ': CaseStudySlugPageMetadataQueryResult
+    '\n    *[_type == "caseStudy" && slug.current == $slug][0] {\n      _id,\n      _type,\n      client,\n      coverImage,\n      description,\n      duration,\n      overview,\n      site,\n      "slug": slug.current,\n      "overviewText": pt::text(overview),\n      tags,\n      title,\n      _updatedAt,\n      seo,\n    }\n  ': CaseStudySlugPageQueryResult
     '*[_type == "home"][0]{title}': HomeTitleQueryResult
-    '{\n    "pages": *[_type == "page" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n    "caseStudies": *[_type == "caseStudy" && defined(slug.current)]{"slug": slug.current, _updatedAt},\n    "posts": *[_type == "post" && defined(slug.current) && !noIndex]{"slug": slug.current, _updatedAt, publishedAt},\n  }': QueryResult
-    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    menuItems[]{\n      _key,\n      ...@->{\n        _type,\n        "slug": slug.current,\n        title\n      }\n    },\n    ogImage,\n  }\n': SettingsQueryResult
+    '{\n  "base": *[_type == "settings"][0].robotsTxt,\n  "disallow": *[\n    _type in ["page", "post", "caseStudy"] &&\n    defined(slug.current) &&\n    seo.disallowInRobotsTxt == true\n  ]{\n    _type,\n    "path": select(_type == "page" => array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/"), slug.current)\n  }\n}': RobotsQueryResult
+    '{\n    "discourage": *[_type == "settings"][0].seo.discourageSearchEngines == true,\n    "home": *[_type == "home"][0]{_updatedAt, "hidden": seo.noIndex == true},\n    "pages": *[_type == "page" && defined(slug.current) && seo.noIndex != true && seo.excludeFromSitemap != true && !defined(seo.canonicalUrl)]{"slug": array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/"), _updatedAt},\n    "caseStudies": *[_type == "caseStudy" && defined(slug.current) && seo.noIndex != true && seo.excludeFromSitemap != true && !defined(seo.canonicalUrl)]{"slug": slug.current, _updatedAt},\n    "posts": *[_type == "post" && defined(slug.current) && seo.noIndex != true && seo.excludeFromSitemap != true && !defined(seo.canonicalUrl)]{"slug": slug.current, _updatedAt, publishedAt},\n  }': QueryResult
+    '\n  *[_type == "settings"][0]{\n    _id,\n    _type,\n    footer,\n    menuItems[]{\n      _key,\n      ...@->{\n        _type,\n        "slug": select(_type == "page" => array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/"), slug.current),\n        title\n      }\n    },\n    popularSearches{\n      label,\n      links[]{\n        _key,\n        label,\n        "external": linkType == "external",\n        url,\n        newTab,\n        "internal": internal->{\n          _type,\n          title,\n          "slug": select(_type == "page" => array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/"), slug.current)\n        }\n      }\n    },\n    ogImage,\n  }\n': SettingsQueryResult
+    '\n  *[_type == "settings"][0]{headCode, bodyCode}\n': SiteCodeQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
+    '\n  *[_type == "page" && defined(slug.current)]{"slug": string::split(array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/"), "/")}\n': PagePathsQueryResult
+    '\n  *[_type == "page" && slug.current == $last && array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/") == $path][0]{\n    _id,\n    _type,\n    _updatedAt,\n    body,\n    overview,\n    title,\n    "path": array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/"),\n    "ancestors": array::compact([\n  parent->parent->parent->parent->{"title": coalesce(seo.breadcrumbTitle, title), "path": array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/")},\n  parent->parent->parent->{"title": coalesce(seo.breadcrumbTitle, title), "path": array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/")},\n  parent->parent->{"title": coalesce(seo.breadcrumbTitle, title), "path": array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/")},\n  parent->{"title": coalesce(seo.breadcrumbTitle, title), "path": array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/")}\n]),\n    seo,\n  }\n': PageByPathQueryResult
+    '\n  *[_type == "page" && slug.current == $last && array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/") == $path][0]{\n    title,\n    "overview": pt::text(overview),\n    "path": array::join(array::compact([\n  parent->parent->parent->parent->slug.current,\n  parent->parent->parent->slug.current,\n  parent->parent->slug.current,\n  parent->slug.current,\n  slug.current\n]), "/"),\n    seo,\n  }\n': PageMetadataByPathQueryResult
+    '*[_type == "settings"][0]{\n  ogImage,\n  seo{\n    siteName,\n    titleTemplate,\n    defaultDescription,\n    twitterHandle,\n    discourageSearchEngines,\n    entity{type, name, jobTitle, image, sameAs},\n    verification{google, bing, yandex, pinterest, facebook}\n  }\n}': GlobalSeoQueryResult
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

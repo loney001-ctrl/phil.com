@@ -8,9 +8,11 @@ import {Toaster} from 'sonner'
 
 import {CustomPortableText} from '@/components/CustomPortableText'
 import {DraftModeProvider} from '@/components/DraftModeContext'
+import {JsonLd} from '@/components/JsonLd'
 import {Navbar} from '@/components/Navbar'
+import {PopularSearches} from '@/components/PopularSearches'
 import IntroTemplate from '@/intro-template'
-import {siteUrl} from '@/sanity/lib/api'
+import {entityNode, graph, websiteNode} from '@/sanity/lib/jsonLd'
 import {
   getDynamicFetchOptions,
   liveWaitFor,
@@ -20,32 +22,20 @@ import {
   type DynamicFetchOptions,
 } from '@/sanity/lib/live'
 import {settingsQuery} from '@/sanity/lib/queries'
-import {urlForOpenGraphImage} from '@/sanity/lib/utils'
+import {buildLayoutMetadata, getGlobalSeo} from '@/sanity/lib/seo'
 
 import {handleError} from './client-functions'
 import {DraftModeToast} from './DraftModeToast'
 
+const homeTitleQuery = defineQuery(`*[_type == "home"][0]{title}`)
+
 export async function generateMetadata(): Promise<Metadata> {
   const {perspective} = await getDynamicFetchOptions()
-  const layoutMetadataQuery = defineQuery(`{
-    "settings": *[_type == "settings"][0]{ogImage},
-    "home": *[_type == "home"][0]{
-      title,
-      "overview": pt::text(overview),
-    }
-  }`)
-  const {
-    data: {settings, home},
-  } = await sanityFetchMetadata({query: layoutMetadataQuery, perspective})
-
-  const ogImage = urlForOpenGraphImage(settings?.ogImage)
-  return {
-    title: home?.title
-      ? {template: `%s | ${home.title}`, default: home.title || 'Personal website'}
-      : undefined,
-    description: home?.overview,
-    openGraph: {images: ogImage ? [ogImage] : []},
-  }
+  const [global, {data: home}] = await Promise.all([
+    getGlobalSeo(perspective),
+    sanityFetchMetadata({query: homeTitleQuery, perspective}),
+  ])
+  return buildLayoutMetadata(global, home?.title)
 }
 
 export const viewport: Viewport = {themeColor: '#000'}
@@ -146,43 +136,40 @@ async function DynamicFooter() {
 async function CachedFooter({perspective, stega}: DynamicFetchOptions) {
   'use cache'
   const data = await fetchSettings({perspective, stega})
-  if (!Array.isArray(data?.footer)) {
+  const hasText = Array.isArray(data?.footer) && data.footer.length > 0
+  const hasSearches = !!data?.popularSearches?.links?.length
+  if (!hasText && !hasSearches) {
     return null
   }
   return (
-    <footer
-      className="bottom-0 w-full bg-white py-12 text-center md:py-20"
-      data-testid="site-footer"
-    >
-      <CustomPortableText
-        id={data._id}
-        type={data._type}
-        path={['footer']}
-        paragraphClasses="text-md md:text-xl"
-        value={data.footer}
-      />
+    <footer className="bottom-0 w-full bg-white" data-testid="site-footer">
+      {hasText && data?.footer && (
+        <div className="py-12 text-center md:py-20">
+          <CustomPortableText
+            id={data._id}
+            type={data._type}
+            path={['footer']}
+            paragraphClasses="text-md md:text-xl"
+            value={data.footer}
+          />
+        </div>
+      )}
+      <PopularSearches data={data?.popularSearches} variant="site" />
     </footer>
   )
 }
 
 /**
- * Sitewide WebSite JSON-LD. Kept separate from per-page structured data (e.g. BlogPosting
- * on /blog/[slug]) so it renders once regardless of route.
+ * Sitewide WebSite + Person/Organization JSON-LD. Page-level nodes (WebPage, BlogPosting,
+ * BreadcrumbList) are rendered by each route and reference these by @id.
  */
 async function WebsiteJsonLd() {
   'use cache'
-  const homeTitleQuery = defineQuery(`*[_type == "home"][0]{title}`)
-  const {data: home} = await sanityFetchMetadata({query: homeTitleQuery, perspective: 'published'})
-  if (!home?.title) return null
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    'name': home.title,
-    'url': siteUrl,
-  }
-
-  return (
-    <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}} />
-  )
+  const [global, {data: home}] = await Promise.all([
+    getGlobalSeo('published'),
+    sanityFetchMetadata({query: homeTitleQuery, perspective: 'published'}),
+  ])
+  const website = websiteNode(global, home?.title)
+  if (!website) return null
+  return <JsonLd data={graph([website, entityNode(global)])} />
 }

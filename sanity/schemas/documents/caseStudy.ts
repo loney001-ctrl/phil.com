@@ -9,8 +9,13 @@ export default defineType({
   icon: DocumentIcon,
   // Uncomment below to have edits publish automatically as you type
   // liveEdit: true,
+  groups: [
+    {name: 'content', title: 'Content', default: true},
+    {name: 'seo', title: 'SEO'},
+  ],
   fields: [
     defineField({
+      group: 'content',
       name: 'title',
       description: 'This field is the title of your case study.',
       title: 'Title',
@@ -18,6 +23,7 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -29,6 +35,7 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'overview',
       description: 'Used both for the <meta> description tag for SEO, and case study subheader.',
       title: 'Overview',
@@ -57,6 +64,7 @@ export default defineType({
       validation: (rule) => rule.max(155).required(),
     }),
     defineField({
+      group: 'content',
       name: 'coverImage',
       title: 'Cover Image',
       description:
@@ -68,21 +76,25 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      group: 'content',
       name: 'duration',
       title: 'Duration',
       type: 'duration',
     }),
     defineField({
+      group: 'content',
       name: 'client',
       title: 'Client',
       type: 'string',
     }),
     defineField({
+      group: 'content',
       name: 'site',
       title: 'Site',
       type: 'url',
     }),
     defineField({
+      group: 'content',
       name: 'tags',
       title: 'Tags',
       type: 'array',
@@ -92,6 +104,7 @@ export default defineType({
       },
     }),
     defineField({
+      group: 'content',
       name: 'description',
       title: 'Case Study Description',
       type: 'array',
@@ -151,5 +164,6 @@ export default defineType({
         }),
       ],
     }),
+    defineField({name: 'seo', title: 'SEO', type: 'seo', group: 'seo'}),
   ],
 })
