@@ -14,6 +14,7 @@ const ACCENT = '#B8FF00'
 
 export const metadata: Metadata = {
   title: 'Blog',
+  alternates: {canonical: '/blog'},
 }
 
 export default async function BlogIndexPage() {
@@ -36,7 +37,7 @@ async function DynamicBlogIndex() {
 async function CachedBlogIndex({perspective, stega}: DynamicFetchOptions) {
   'use cache'
   const blogIndexQuery = defineQuery(`
-    *[_type == "post" && !(_id in path("drafts.**")) && !noIndex] | order(publishedAt desc) {
+    *[_type == "post" && !(_id in path("drafts.**")) && seo.noIndex != true] | order(publishedAt desc) {
       _id,
       _type,
       "slug": slug.current,

@@ -1,12 +1,15 @@
 import type {Metadata, ResolvingMetadata} from 'next'
-import {createDataAttribute, defineQuery} from 'next-sanity'
+import {createDataAttribute, defineQuery, stegaClean} from 'next-sanity'
 import Link from 'next/link'
 import {notFound} from 'next/navigation'
 
 import {CustomPortableText} from '@/components/CustomPortableText'
+import {PageHeadCode} from '@/components/HeadCode'
 import {Header} from '@/components/Header'
 import ImageBox from '@/components/ImageBox'
+import {JsonLd} from '@/components/JsonLd'
 import {studioUrl} from '@/sanity/lib/api'
+import {breadcrumbNode, graph, pageNode} from '@/sanity/lib/jsonLd'
 import {
   getDynamicFetchOptions,
   sanityFetch,
@@ -15,7 +18,8 @@ import {
   type DynamicFetchOptions,
 } from '@/sanity/lib/live'
 import {slugsByTypeQuery, type SlugsByTypeQueryParams} from '@/sanity/lib/queries'
-import {urlForOpenGraphImage} from '@/sanity/lib/utils'
+import {buildMetadata, getGlobalSeo} from '@/sanity/lib/seo'
+import {resolveHref, urlForOpenGraphImage} from '@/sanity/lib/utils'
 
 export async function generateStaticParams() {
   const {data} = await sanityFetchStaticParams({
@@ -41,21 +45,28 @@ export async function generateMetadata(
     *[_type == "caseStudy" && slug.current == $slug][0] {
       coverImage,
       title,
+      _updatedAt,
+      "slug": slug.current,
       "overview": pt::text(overview),
+      seo,
     }
   `)
-  const {data} = await sanityFetchMetadata({
-    query: caseStudySlugPageMetadataQuery,
-    params: {slug},
-    perspective,
-  })
+  const [{data}, global] = await Promise.all([
+    sanityFetchMetadata({query: caseStudySlugPageMetadataQuery, params: {slug}, perspective}),
+    getGlobalSeo(perspective),
+  ])
+  if (!data) return {}
 
-  const ogImage = urlForOpenGraphImage(data?.coverImage)
-  return {
-    title: data?.title,
-    description: data?.overview || (await parent).description,
-    openGraph: ogImage ? {images: [ogImage, ...((await parent).openGraph?.images || [])]} : {},
-  }
+  return buildMetadata({
+    seo: data.seo,
+    title: data.title,
+    description: data.overview || (await parent).description,
+    image: data.coverImage,
+    path: resolveHref('caseStudy', data.slug) || `/case-studies/${slug}`,
+    global,
+    openGraphType: 'article',
+    modifiedTime: data._updatedAt,
+  })
 }
 
 export default async function CaseStudySlugPage({params}: PageProps<'/case-studies/[slug]'>) {
@@ -80,8 +91,11 @@ async function CachedCaseStudySlugPage({
       overview,
       site,
       "slug": slug.current,
+      "overviewText": pt::text(overview),
       tags,
       title,
+      _updatedAt,
+      seo,
     }
   `)
   const {data} = await sanityFetch({
@@ -107,8 +121,34 @@ async function CachedCaseStudySlugPage({
   const startYear = duration?.start ? new Date(duration.start).getFullYear() : undefined
   const endYear = duration?.end ? new Date(duration?.end).getFullYear() : 'Now'
 
+  const casePath = resolveHref('caseStudy', stegaClean(data.slug)) || '/case-studies'
+  const coverUrl = urlForOpenGraphImage(coverImage)
+  const jsonLd = graph([
+    breadcrumbNode(
+      [
+        {
+          name: stegaClean(data.seo?.breadcrumbTitle) || stegaClean(title) || 'Case study',
+          path: casePath,
+        },
+      ],
+      casePath,
+    ),
+    ...pageNode({
+      seo: data.seo,
+      defaultType: 'Article',
+      path: casePath,
+      title: stegaClean(title) || '',
+      description: data.seo?.metaDescription || data.overviewText,
+      image: coverUrl,
+      dateModified: data._updatedAt,
+      hasBreadcrumb: true,
+    }),
+  ])
+
   return (
     <div className="space-y-6" data-testid="case-study-content">
+      <JsonLd data={jsonLd} />
+      <PageHeadCode code={data.seo?.headCode} id={data._id} />
       {/* Header */}
       <Header
         id={data?._id || null}

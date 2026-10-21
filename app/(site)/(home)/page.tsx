@@ -1,9 +1,22 @@
+import {stegaClean} from 'next-sanity'
+
+import {getHomeData, HOME_FALLBACK} from '@/app/(site)/(home)/homeData'
+import {PageHeadCode} from '@/components/HeadCode'
+import {JsonLd} from '@/components/JsonLd'
+import {PopularSearches} from '@/components/PopularSearches'
+import {entityNode, graph, pageNode, websiteNode} from '@/sanity/lib/jsonLd'
+import {sanityFetch} from '@/sanity/lib/live'
+import {settingsQuery} from '@/sanity/lib/queries'
+import {getGlobalSeo} from '@/sanity/lib/seo'
+import {urlForOpenGraphImage} from '@/sanity/lib/utils'
+
 const PRIMARY = '#1E3BC8'
 const ACCENT = '#B8FF00'
 
 export default function HomePage() {
   return (
     <div className="home-page min-h-screen bg-[#F5F5F7] text-[#0A0A0A]">
+      <HomeSeo />
       {/* NAV */}
       <header className="px-5 pt-6 md:px-10 md:pt-8 lg:px-20">
         <nav
@@ -578,8 +591,41 @@ export default function HomePage() {
           </a>
         </div>
       </footer>
+      <HomePopularSearches />
     </div>
   )
+}
+
+/** WebSite, entity and WebPage JSON-LD, plus Home → SEO → head code. Published content only. */
+async function HomeSeo() {
+  'use cache'
+  const [home, global] = await Promise.all([getHomeData(), getGlobalSeo('published')])
+  const jsonLd = graph([
+    websiteNode(global, home?.title),
+    entityNode(global),
+    ...pageNode({
+      seo: home?.seo,
+      defaultType: 'WebPage',
+      path: '/',
+      title: stegaClean(home?.seo?.metaTitle) || HOME_FALLBACK.title,
+      description: home?.seo?.metaDescription || home?.overview || HOME_FALLBACK.description,
+      image: urlForOpenGraphImage(home?.seo?.ogImage ?? global?.ogImage),
+      dateModified: home?._updatedAt,
+      hasBreadcrumb: false,
+    }),
+  ])
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      {home?._id && <PageHeadCode code={home.seo?.headCode} id={home._id} />}
+    </>
+  )
+}
+
+async function HomePopularSearches() {
+  'use cache'
+  const {data} = await sanityFetch({query: settingsQuery, perspective: 'published', stega: false})
+  return <PopularSearches data={data?.popularSearches} variant="home" />
 }
 
 function StepCard({
