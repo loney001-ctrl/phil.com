@@ -1,0 +1,359 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="robots" content="noindex,nofollow">
+<title>Blog Post — Phil Loney</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+/* Layout: 1440 max; post header full width, then a 3-col read: contents rail | 68ch article | margin. Single light look by choice (matches phil-loney.com). */
+:root{
+  --bg:#F5F5F7; --ink:#0A0A0A; --paper:#FFFFFF; --muted:#6B6B72; --body2:#3A3A40; --rule:#0A0A0A; --soft:#E4E4E9;
+  --primary:#1E3BC8; --accent:#B8FF00;
+  --on-dark:#F5F5F7; --dark-muted:#9A9AA2; --dark-body:#D6D6DB; --on-primary-body:#E8EBFB;
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --gutter:clamp(16px,5.5vw,80px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5}
+a{color:var(--ink)} a:hover{color:var(--primary)}
+:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+h1,h2,h3,p,ol,ul,blockquote,figure,dl{margin:0}
+h1,h2,h3{text-wrap:balance}
+.d{font-family:var(--display);font-weight:900;letter-spacing:-0.04em;line-height:0.92}
+.max{max-width:1440px;margin:0 auto}
+.wrap{padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+.muted{color:var(--muted)}
+.pill{display:inline-block;align-self:flex-start;background:var(--accent);color:var(--ink);border-radius:999px;padding:7px 14px;font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em;text-decoration:none}
+.pill.out{background:transparent;border:1.5px solid currentColor;padding:6px 14px}
+
+/* nav */
+header.site{padding-block:32px 0}
+nav.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 28px;border:1.5px solid var(--ink);border-radius:32px}
+.brand{font-family:var(--display);font-size:18px;font-weight:900;letter-spacing:-0.01em;text-decoration:none}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px}
+.links a{text-decoration:none}
+.links a[aria-current]{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
+.btn-sub{background:var(--primary);color:var(--on-dark)!important;border-radius:999px;padding:15px 26px;font-family:var(--display);font-size:14px;font-weight:800;letter-spacing:0.06em;text-decoration:none!important}
+
+/* post header */
+.post-head{padding-block:88px 64px;display:flex;flex-direction:column;gap:36px}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;font-size:16px}
+.crumbs a{color:var(--muted)}
+.post-head h1{max-width:1180px;font-size:clamp(46px,7.6vw,112px);letter-spacing:-0.05em}
+.post-head h1 span{color:var(--primary)}
+.dek{max-width:760px;font-size:clamp(21px,1.9vw,27px);line-height:1.45}
+.byline{display:flex;flex-wrap:wrap;gap:0;border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule)}
+.byline div{flex:1 1 180px;padding:16px 24px 16px 0;display:flex;flex-direction:column;gap:2px}
+.byline dt{font-size:14px;color:var(--muted)}
+.byline dd{margin:0;font-family:var(--display);font-size:16px;font-weight:800;letter-spacing:0.02em;font-variant-numeric:tabular-nums}
+
+/* read layout */
+.read{display:grid;grid-template-columns:220px minmax(0,1fr);gap:clamp(32px,5vw,96px);padding-block:24px 120px;align-items:start}
+@media (max-width:1000px){.read{grid-template-columns:minmax(0,1fr)}.rail{position:static!important}}
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);display:flex;flex-direction:column;gap:14px}
+.rail p{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em}
+.rail ol{list-style:none;padding:0;display:flex;flex-direction:column;border-top:1.5px solid var(--rule)}
+.rail li{border-bottom:1.5px solid var(--soft)}
+.rail a{display:flex;gap:10px;padding:11px 0;font-size:16px;line-height:1.3;text-decoration:none}
+.rail a span{font-family:var(--display);font-weight:800;font-size:13px;color:var(--muted);padding-top:2px;font-variant-numeric:tabular-nums}
+
+article{max-width:720px;min-width:0;display:flex;flex-direction:column;gap:28px}
+article > p{font-size:21px;line-height:1.65}
+article > p:first-of-type::first-letter{font-family:var(--display);font-weight:900;float:left;font-size:88px;line-height:0.8;padding:6px 12px 0 0}
+article h2{font-family:var(--display);font-size:clamp(32px,3.4vw,46px);font-weight:900;letter-spacing:-0.03em;line-height:1;margin-top:40px;scroll-margin-top:24px}
+article h3{font-family:var(--display);font-size:24px;font-weight:800;letter-spacing:-0.01em;margin-top:12px}
+article ul,article ol.list{padding-left:1.2em;display:flex;flex-direction:column;gap:12px;font-size:21px;line-height:1.6}
+article li::marker{font-family:var(--display);font-weight:800}
+.ph{color:var(--muted)}
+sup a{font-family:var(--display);font-size:12px;font-weight:800;text-decoration:none;color:var(--primary)}
+
+/* BLUF */
+.bluf{background:var(--ink);color:var(--on-dark);border-radius:40px;padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:20px}
+.bluf ol{padding-left:1.3em;display:flex;flex-direction:column;gap:14px;font-size:20px;line-height:1.5;color:var(--dark-body)}
+.bluf li::marker{color:var(--accent);font-family:var(--display);font-weight:900}
+.bluf b{color:var(--on-dark);font-weight:500}
+
+/* pull quote */
+.pull{margin:24px 0;padding:8px 0 8px;border-top:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);padding-block:32px}
+.pull p{font-family:var(--display);font-size:clamp(30px,3.4vw,46px);font-weight:900;line-height:1;letter-spacing:-0.03em}
+.pull p span{color:var(--primary)}
+
+/* evidence callout */
+.evidence{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1.5px solid var(--rule);border-radius:32px;overflow:hidden;background:var(--paper)}
+@media (max-width:640px){.evidence{grid-template-columns:minmax(0,1fr)}.evidence > div + div{border-left:0!important;border-top:1.5px solid var(--rule)}}
+.evidence > div{padding:28px;display:flex;flex-direction:column;gap:12px}
+.evidence > div + div{border-left:1.5px solid var(--rule)}
+.evidence p{font-size:18px;line-height:1.55;color:var(--body2)}
+
+/* table */
+.tbl{overflow-x:auto;border:1.5px solid var(--rule);border-radius:24px;background:var(--paper)}
+table{width:100%;border-collapse:collapse;min-width:560px;font-variant-numeric:tabular-nums}
+caption{text-align:left;padding:18px 20px 6px;font-size:15px;color:var(--muted)}
+th{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em;text-align:left;padding:12px 20px;border-bottom:1.5px solid var(--rule)}
+td{padding:14px 20px;font-size:17px;border-bottom:1px solid var(--soft)}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right}
+.tier{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.06em;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.tier.full{background:var(--primary);color:var(--on-dark)}
+.tier.hub{border:1.5px solid var(--ink)}
+.tier.skip{color:var(--muted);border:1.5px dashed var(--muted)}
+
+/* figure */
+.fig{display:flex;flex-direction:column;gap:12px}
+.fig .frame{aspect-ratio:16/9;max-width:100%;border-radius:32px;border:1.5px dashed var(--muted);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:17px;color:var(--muted);background:var(--paper)}
+.fig figcaption{font-size:15px;color:var(--muted)}
+
+/* sources */
+.sources{border-top:1.5px solid var(--rule);padding-top:24px;display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.sources h2{margin-top:0;font-size:14px;letter-spacing:0.08em;font-weight:800}
+.sources ol{padding-left:1.4em;display:flex;flex-direction:column;gap:8px;font-size:16px;color:var(--body2)}
+
+/* author */
+.author{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;border:1.5px solid var(--rule);border-radius:40px;padding:32px;margin-top:16px}
+.avatar{width:72px;height:72px;border-radius:50%;background:var(--primary);color:var(--on-dark);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:900;font-size:24px;letter-spacing:-0.02em;flex:none}
+.author div{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.author b{font-family:var(--display);font-size:20px;font-weight:900}
+.author p{font-size:18px;line-height:1.55;color:var(--body2)}
+
+/* newsletter */
+.news{background:var(--primary);color:var(--on-dark)}
+.news .inner{padding-block:104px;display:flex;flex-wrap:wrap;gap:40px 64px;align-items:flex-end;justify-content:space-between}
+.news h2{flex:1 1 520px;font-size:clamp(46px,6.4vw,92px);letter-spacing:-0.05em}
+.news h2 span{color:var(--accent)}
+.news-side{flex:1 1 380px;max-width:520px;display:flex;flex-direction:column;gap:20px}
+.news-side p{font-size:19px;line-height:1.55;color:var(--on-primary-body)}
+form{display:flex;flex-wrap:wrap;gap:10px}
+form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+form input{flex:1 1 240px;min-width:0;height:60px;border-radius:999px;border:1.5px solid var(--on-dark);background:transparent;color:var(--on-dark);padding:0 24px;font-family:var(--serif);font-size:18px}
+form input::placeholder{color:var(--on-primary-body);opacity:0.85}
+form input:focus-visible{outline-color:var(--accent)}
+form button{height:60px;border:0;border-radius:999px;background:var(--accent);color:var(--ink);padding:0 30px;font-family:var(--display);font-size:15px;font-weight:900;letter-spacing:0.06em;cursor:pointer}
+form button:focus-visible{outline-color:var(--accent)}
+#form-note{font-size:16px;color:var(--on-primary-body)}
+
+/* related */
+.related{padding-block:120px}
+.rel-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:40px}
+.rel-head h2{font-size:clamp(46px,6vw,88px)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:16px}
+.card{border-radius:40px;padding:32px;min-height:360px;display:flex;flex-direction:column;gap:18px;text-decoration:none}
+.card h3{font-family:var(--display);font-size:32px;font-weight:900;line-height:0.98;letter-spacing:-0.03em}
+.card p{font-size:17px;line-height:1.55}
+.card .foot{margin-top:auto;display:flex;justify-content:space-between;gap:12px;padding-top:16px;border-top:1.5px solid currentColor;font-size:15px}
+.card.dark{background:var(--ink);color:var(--on-dark)} .card.dark p{color:var(--dark-body)} .card.dark:hover{color:var(--on-dark)}
+.card.white{background:var(--paper);border:1.5px solid var(--ink);color:var(--ink)} .card.white p{color:var(--body2)}
+.card.blue{background:var(--primary);color:var(--on-dark)} .card.blue p{color:var(--on-primary-body)} .card.blue:hover{color:var(--on-dark)}
+.card:hover h3{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+
+footer .inner{padding-block:48px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;border-top:1.5px solid var(--rule)}
+footer .fl{display:flex;flex-wrap:wrap;gap:12px 32px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<div class="max">
+<header class="site wrap">
+  <nav class="top" aria-label="Primary">
+    <a href="home.html" class="brand">PHIL LONEY</a>
+    <div class="links">
+      <a href="case-files.html">Case Studies</a>
+      <a href="about.html">About Me</a>
+      <a href="blog.html" aria-current="page">Blog</a>
+      <a href="#subscribe" class="btn-sub">SUBSCRIBE</a>
+    </div>
+  </nav>
+</header>
+
+<section id="top" class="post-head wrap">
+  <div class="crumbs">
+    <a href="blog.html">Blog</a><span class="muted">/</span>
+    <span class="pill">BREAKDOWNS</span>
+    <span class="pill out">LOCAL SEO</span>
+  </div>
+  <h1 class="d">SEARCH DEMAND IS <span>NOT ALWAYS</span> THE BEST PROXY FOR OPPORTUNITY.</h1>
+  <p class="dek">Keyword volume tells you how many people type a phrase. It doesn't tell you where the buyers are. For local services, operating density often predicts demand better than any keyword tool.</p>
+  <dl class="byline">
+    <div><dt>Written by</dt><dd>PHIL LONEY</dd></div>
+    <div><dt>Published</dt><dd>[DD MONTH YYYY]</dd></div>
+    <div><dt>Reading time</dt><dd>[X] MIN</dd></div>
+    <div><dt>Series</dt><dd>BREAKDOWNS · [NO.]</dd></div>
+  </dl>
+</section>
+
+<div class="read wrap">
+  <aside class="rail" aria-label="Contents">
+    <p>CONTENTS</p>
+    <ol>
+      <li><a href="#s1"><span>01</span>Where volume misleads</a></li>
+      <li><a href="#s2"><span>02</span>The density model</a></li>
+      <li><a href="#s3"><span>03</span>Tiering the rollout</a></li>
+      <li><a href="#s4"><span>04</span>What transfers</a></li>
+    </ol>
+  </aside>
+
+  <article>
+    <section class="bluf" aria-label="Key takeaways">
+      <span class="pill">THE SHORT VERSION</span>
+      <ol>
+        <li><b>Search volume measures phrasing, not buyers.</b> Low-volume suburbs can hold the highest real demand.</li>
+        <li><b>Score locations on what drives demand.</b> For childcare first aid, that's centres, educators and young families.</li>
+        <li><b>Roll out in tiers.</b> Full pages where demand is real, hub pages where it isn't.</li>
+      </ol>
+    </section>
+
+    <p>Most local SEO rollouts start with a keyword export. Sort by volume, write pages for the top suburbs, and work down the list. It feels rigorous because it has numbers in it. It's also why so much programmatic local content fails quietly: the numbers measure the wrong thing.</p>
+
+    <h2 id="s1">Where volume misleads</h2>
+    <p>Keyword tools model how often a phrase is searched. At suburb level, most of those estimates are rounded to zero or bucketed so coarsely that the difference between two suburbs is noise. The ranking you get from them is a ranking of the tool's sampling, not of the market.<sup><a href="#src1" aria-label="Source 1">1</a></sup></p>
+    <p class="ph">[Add the specific example: two suburbs with similar or zero reported volume, and what the client's own booking data showed for each.]</p>
+
+    <figure class="pull">
+      <p>THE DEMAND IS USUALLY ALREADY IN THE DATA, <span>PRICED AS NOISE.</span></p>
+    </figure>
+
+    <h2 id="s2">The density model</h2>
+    <p>Childcare first aid demand clusters where the people who need the certificate concentrate. So instead of asking how many people search for the course in a suburb, ask what generates the need there.</p>
+    <ul>
+      <li>Childcare centres operating in or near the suburb</li>
+      <li>Educator headcount those centres employ</li>
+      <li>Young families who book the parent version of the course</li>
+    </ul>
+    <p>Each suburb gets a density score from those inputs. The score becomes a hypothesis you can test against bookings, which a keyword volume figure never was.</p>
+
+    <div class="evidence" role="group" aria-label="Evidence versus opinion">
+      <div>
+        <span class="pill">DATA</span>
+        <p class="ph">[What the numbers showed: correlation between density score and bookings, sample size, time period.]</p>
+      </div>
+      <div>
+        <span class="pill out">OPINION</span>
+        <p>Why the mechanism works: certification demand is driven by employment and regulation, and neither shows up in search volume.</p>
+      </div>
+    </div>
+
+    <h2 id="s3">Tiering the rollout</h2>
+    <p>Scoring every suburb doesn't mean writing a page for every suburb. The score decides how much content each location earns.</p>
+
+    <div class="tbl">
+      <table>
+        <caption>Suburb tiers by density score (example structure)</caption>
+        <thead><tr><th>SUBURB</th><th class="num">CENTRES</th><th class="num">DENSITY SCORE</th><th>TIER</th></tr></thead>
+        <tbody>
+          <tr><td>[Suburb A]</td><td class="num">[n]</td><td class="num">[score]</td><td><span class="tier full">FULL PAGE</span></td></tr>
+          <tr><td>[Suburb B]</td><td class="num">[n]</td><td class="num">[score]</td><td><span class="tier full">FULL PAGE</span></td></tr>
+          <tr><td>[Suburb C]</td><td class="num">[n]</td><td class="num">[score]</td><td><span class="tier hub">HUB PAGE</span></td></tr>
+          <tr><td>[Suburb D]</td><td class="num">[n]</td><td class="num">[score]</td><td><span class="tier skip">NO PAGE</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Full pages where demand is real</h3>
+    <p>High-scoring suburbs get a dedicated page with local proof: nearby centres served, session times, venue details. That's information only a page about this suburb can carry.</p>
+    <h3>Hub pages where it isn't</h3>
+    <p>Lower-scoring suburbs roll up into a regional hub. That avoids a set of near-identical pages that add nothing and dilute the site.</p>
+
+    <figure class="fig">
+      <div class="frame">[Chart: density score vs bookings by suburb, one point per suburb]</div>
+      <figcaption>Figure 1. [Caption stating what the chart shows and the data period.]</figcaption>
+    </figure>
+
+    <h2 id="s4">What transfers</h2>
+    <p>The tactic here is childcare-specific. The principle isn't. Before you rank locations by search volume, name what actually creates demand for the service, find a data source for it, and score on that.</p>
+    <ol class="list">
+      <li>Find the mechanism that generates demand.</li>
+      <li>Score locations on it, not on phrasing.</li>
+      <li>Test the score against real bookings before scaling.</li>
+    </ol>
+
+    <section class="sources" aria-labelledby="src-h">
+      <h2 id="src-h" class="d">SOURCES &amp; NOTES</h2>
+      <ol>
+        <li id="src1" class="ph">[Source for the keyword-tool sampling claim: title, publisher, link.]</li>
+      </ol>
+    </section>
+
+    <section id="author" class="author" aria-label="About the author">
+      <span class="avatar" aria-hidden="true">PL</span>
+      <div>
+        <b>Phil Loney</b>
+        <p>Marketing strategist and systems thinker in Melbourne. I find the commercial signal other marketers miss, turn it into a system you can test, then build the AI infrastructure to run it at scale.</p>
+        <a href="blog.html#subscribe" style="font-size:16px">Get the Jarvis SEO Brief</a>
+      </div>
+    </section>
+  </article>
+</div>
+</div>
+
+<section id="subscribe" class="news">
+  <div class="max wrap inner">
+    <h2 class="d">MECHANISMS, NOT TACTICS. <span>WEEKLY.</span></h2>
+    <div class="news-side">
+      <p>The Jarvis SEO Brief: one breakdown a week on what's actually moving search and AI citation, with the evidence attached.</p>
+      <form id="signup" novalidate>
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+        <button type="submit">SUBSCRIBE</button>
+      </form>
+      <p id="form-note" role="status"></p>
+    </div>
+  </div>
+</section>
+
+<div class="max">
+<section id="related" class="related wrap">
+  <div class="rel-head">
+    <h2 class="d">KEEP READING</h2>
+    <p class="muted" style="max-width:380px">More breakdowns and case files that use the same method.</p>
+  </div>
+  <div class="cards">
+    <a href="#top" class="card blue">
+      <span class="pill">CASE FILE</span>
+      <h3>FROM 1–3% TO 25% CONVERSION RATE</h3>
+      <p>A cold email campaign aimed only at prospects already showing readiness signals.</p>
+      <span class="foot"><span>Real Estate BPO</span><span>Read →</span></span>
+    </a>
+    <a href="#top" class="card dark">
+      <span class="pill">CASE FILE</span>
+      <h3>100% INCREASE IN SQ LEADS</h3>
+      <p>The under-used asset was the client's own database. The campaign was built around it.</p>
+      <span class="foot"><span>Bersih Co Cleaning</span><span>Read →</span></span>
+    </a>
+    <a href="#top" class="card white">
+      <span class="pill">BREAKDOWNS</span>
+      <h3>[NEXT POST TITLE]</h3>
+      <p class="ph">[One-line summary of the post.]</p>
+      <span class="foot"><span>[Category]</span><span>Read →</span></span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>
+      <p>Phil Loney — marketing strategist and systems thinker, Melbourne.</p>
+      <p class="muted" style="font-size:15px">© 2026</p>
+    </div>
+    <div class="fl">
+      <a href="blog.html">Breakdowns</a>
+      <a href="blog.html#subscribe">Jarvis SEO Brief</a>
+      <a href="home.html">phil-loney.com</a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+document.getElementById('signup').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var input = document.getElementById('email');
+  var note = document.getElementById('form-note');
+  if (!input.value || !input.checkValidity()) {
+    note.textContent = 'Enter a valid email address, like you@company.com.';
+    input.focus();
+    return;
+  }
+  note.textContent = 'Template preview: this form is not connected to a mailing list yet.';
+});
+</script>
+
+</body></html>

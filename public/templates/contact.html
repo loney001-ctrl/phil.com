@@ -1,0 +1,350 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="robots" content="noindex,nofollow">
+<title>Contact — Phil Loney</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+/* Layout: 1440 max; big statement header, then form (7 cols) beside a direct-contact column (5 cols); fit/not-fit band; footer. Single light look by choice (matches phil-loney.com). */
+:root{
+  --bg:#F5F5F7; --ink:#0A0A0A; --paper:#FFFFFF; --muted:#6B6B72; --body2:#3A3A40; --soft:#E4E4E9;
+  --primary:#1E3BC8; --accent:#B8FF00; --error:#B42318;
+  --on-dark:#F5F5F7; --dark-muted:#9A9AA2; --dark-body:#D6D6DB; --on-primary-body:#E8EBFB;
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --gutter:clamp(16px,5.5vw,80px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5}
+a{color:var(--ink)} a:hover{color:var(--primary)}
+:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+h1,h2,h3,p,ol,ul,dl,dd,fieldset{margin:0}
+h1,h2,h3{text-wrap:balance}
+.d{font-family:var(--display);font-weight:900;letter-spacing:-0.04em;line-height:0.9}
+.max{max-width:1440px;margin:0 auto}
+.wrap{padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+.muted{color:var(--muted)}
+.pill{display:inline-block;align-self:flex-start;background:var(--accent);color:var(--ink);border-radius:999px;padding:7px 14px;font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em}
+.pill.out{background:transparent;border:1.5px solid currentColor;padding:6px 14px}
+
+/* nav */
+header.site{padding-block:32px 0}
+nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 28px;border:1.5px solid var(--ink);border-radius:32px}
+.brand{font-family:var(--display);font-size:18px;font-weight:900;letter-spacing:-0.01em;text-decoration:none}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px}
+.links a{text-decoration:none}
+.btn-sub{background:var(--primary);color:var(--on-dark)!important;border-radius:999px;padding:15px 26px;font-family:var(--display);font-size:14px;font-weight:800;letter-spacing:0.06em;text-decoration:none}
+
+/* hero */
+.hero{position:relative;padding-block:88px 72px;display:flex;flex-direction:column;gap:32px}
+.hero .k{font-size:17px;color:var(--muted)}
+.hero h1{font-size:clamp(56px,10vw,150px);letter-spacing:-0.05em;line-height:0.88}
+.hero h1 span{color:var(--primary)}
+.hero p.lede{max-width:700px;font-size:clamp(21px,1.9vw,26px);line-height:1.5}
+.sticker{position:absolute;top:96px;right:max(var(--gutter),env(safe-area-inset-right,0px));width:164px;height:164px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;text-align:center;transform:rotate(-14deg);font-family:var(--display);font-size:16px;font-weight:900;line-height:1.05;letter-spacing:0.02em}
+@media (max-width:980px){.sticker{display:none}}
+
+/* main grid */
+.main{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;padding-block:24px 120px;align-items:start}
+.form-card{grid-column:span 7;background:var(--paper);border:1.5px solid var(--ink);border-radius:48px;padding:clamp(24px,3.4vw,48px);display:flex;flex-direction:column;gap:32px}
+.side{grid-column:span 5;display:flex;flex-direction:column;gap:16px}
+@media (max-width:1000px){.form-card,.side{grid-column:1 / -1}}
+
+.form-card h2{font-size:clamp(36px,3.6vw,52px)}
+form{display:flex;flex-direction:column;gap:28px}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:640px){.row{grid-template-columns:minmax(0,1fr)}}
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.field label,legend{font-family:var(--display);font-size:13px;font-weight:800;letter-spacing:0.08em}
+.field label small,legend small{font-family:var(--serif);font-size:15px;font-weight:400;letter-spacing:0;color:var(--muted);margin-left:6px}
+input[type=text],input[type=email],input[type=url],textarea{width:100%;border:0;border-bottom:1.5px solid var(--ink);background:transparent;padding:10px 0 12px;font-family:var(--serif);font-size:20px;color:var(--ink);border-radius:0}
+textarea{border:1.5px solid var(--ink);border-radius:24px;padding:16px 18px;min-height:160px;resize:vertical;line-height:1.5}
+input::placeholder,textarea::placeholder{color:#8A8A92}
+input:focus-visible,textarea:focus-visible{outline:none;border-color:var(--primary);box-shadow:0 2px 0 0 var(--primary)}
+textarea:focus-visible{box-shadow:0 0 0 2px var(--primary)}
+.hint{font-size:15px;color:var(--muted)}
+.err{font-size:15px;color:var(--error);min-height:0}
+.err:empty{display:none}
+[aria-invalid=true]{border-color:var(--error)!important}
+
+fieldset{border:0;padding:0;display:flex;flex-direction:column;gap:12px;min-width:0}
+legend{padding:0;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip label{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 18px;border:1.5px solid var(--ink);border-radius:999px;font-family:var(--display);font-size:14px;font-weight:800;letter-spacing:0.04em;cursor:pointer;user-select:none}
+.chip label::before{content:"";width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink);flex:none}
+.chip input[type=checkbox] + label::before{border-radius:3px}
+.chip input:checked + label{background:var(--ink);color:var(--on-dark)}
+.chip input:checked + label::before{background:var(--accent);border-color:var(--accent)}
+.chip input:focus-visible + label{outline:3px solid var(--primary);outline-offset:3px}
+
+.submit-row{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;padding-top:8px;border-top:1.5px solid var(--soft)}
+button.send{border:0;border-radius:8px;background:var(--primary);color:var(--on-dark);padding:22px 36px;font-family:var(--display);font-size:17px;font-weight:900;letter-spacing:0.06em;cursor:pointer}
+button.send:hover{background:var(--ink)}
+#status{font-size:16px;color:var(--body2);flex:1 1 240px}
+
+/* side cards */
+.card{border-radius:40px;padding:clamp(24px,2.8vw,36px);display:flex;flex-direction:column;gap:18px}
+.card.dark{background:var(--ink);color:var(--on-dark)}
+.card.dark .lbl{color:var(--dark-muted)}
+.lbl{font-size:15px}
+.email-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;border-top:1.5px solid var(--on-dark);padding-top:18px}
+.email{font-family:var(--display);font-size:clamp(22px,2.2vw,30px);font-weight:900;letter-spacing:-0.02em;user-select:all;overflow-wrap:anywhere;min-width:0}
+button.copy{min-height:44px;border:1.5px solid var(--on-dark);background:transparent;color:var(--on-dark);border-radius:999px;padding:8px 18px;font-family:var(--display);font-size:13px;font-weight:800;letter-spacing:0.08em;cursor:pointer}
+button.copy:hover{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+button.copy:focus-visible{outline-color:var(--accent)}
+.facts{display:flex;flex-direction:column}
+.facts div{display:flex;justify-content:space-between;gap:16px;border-top:1.5px solid #2A2A2E;padding:12px 0}
+.facts dt{font-size:15px;color:var(--dark-muted)}
+.facts dd{font-family:var(--display);font-size:15px;font-weight:800;letter-spacing:0.04em;text-align:right}
+
+.card.blue{background:var(--primary);color:var(--on-dark)}
+.card.blue h3{font-family:var(--display);font-size:30px;font-weight:900;letter-spacing:-0.02em;line-height:1}
+.steps{list-style:none;padding:0;display:flex;flex-direction:column}
+.steps li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;border-top:1.5px solid var(--on-dark);padding:16px 0}
+.steps .n{font-family:var(--display);font-size:36px;font-weight:900;line-height:0.85;letter-spacing:-0.04em}
+.steps b{display:block;font-family:var(--display);font-size:17px;font-weight:800;letter-spacing:0.02em;margin-bottom:4px}
+.steps p{font-size:17px;line-height:1.5;color:var(--on-primary-body)}
+
+.card.white{background:var(--paper);border:1.5px solid var(--ink)}
+.elsewhere{list-style:none;padding:0;display:flex;flex-direction:column}
+.elsewhere li{border-top:1.5px solid var(--ink)}
+.elsewhere li:last-child{border-bottom:1.5px solid var(--ink)}
+.elsewhere a{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;text-decoration:none;min-height:44px}
+.elsewhere a b{font-family:var(--display);font-size:18px;font-weight:800}
+.elsewhere a span{font-size:15px;color:var(--muted)}
+
+/* fit band */
+.fit{background:var(--ink);color:var(--on-dark)}
+.fit .inner{padding-block:120px;display:flex;flex-direction:column;gap:56px}
+.fit .k{font-size:17px;color:var(--dark-muted)}
+.fit h2{font-size:clamp(48px,7vw,104px);letter-spacing:-0.05em}
+.fit h2 span{color:var(--accent)}
+.fit-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:820px){.fit-cols{grid-template-columns:minmax(0,1fr)}}
+.fit-col{border:1.5px solid var(--on-dark);border-radius:40px;padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:20px}
+.fit-col.yes{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+.fit-col ul{list-style:none;padding:0;display:flex;flex-direction:column}
+.fit-col li{border-top:1.5px solid currentColor;padding:14px 0;font-size:19px;line-height:1.45}
+.fit-col.no li{color:var(--dark-body);border-color:#3A3A40}
+.fit-col h3{font-family:var(--display);font-size:28px;font-weight:900;letter-spacing:-0.02em}
+
+footer .inner{padding-block:48px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
+footer .fl{display:flex;flex-wrap:wrap;gap:12px 32px}
+</style>
+
+<div class="max">
+<header class="site wrap">
+  <nav aria-label="Primary">
+    <a href="home.html" class="brand">PHIL LONEY</a>
+    <div class="links">
+      <a href="case-files.html">Case Studies</a>
+      <a href="about.html">About Me</a>
+      <a href="blog.html">Blog</a>
+      <a href="blog.html#subscribe" class="btn-sub">SUBSCRIBE</a>
+    </div>
+  </nav>
+</header>
+
+<section id="top" class="hero wrap">
+  <p class="k">§ Contact · Melbourne</p>
+  <h1 class="d">BRING THE DATA.<br><span>I'LL FIND THE SIGNAL.</span></h1>
+  <p class="lede">Strategy engagements for operators who'd rather test a mechanism than buy another tactic. Tell me what you're working on and what data you already have.</p>
+  <div class="sticker" aria-hidden="true">TEST,<br>VALIDATE<br>&amp; SCALE</div>
+</section>
+
+<div class="main wrap">
+  <section class="form-card" aria-labelledby="form-h">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <span class="pill">START HERE</span>
+      <h2 id="form-h" class="d">TELL ME ABOUT THE PROBLEM.</h2>
+    </div>
+
+    <form id="contact" novalidate>
+      <div class="row">
+        <div class="field">
+          <label for="name">NAME</label>
+          <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+          <p class="err" id="name-err"></p>
+        </div>
+        <div class="field">
+          <label for="email">EMAIL</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required>
+          <p class="err" id="email-err"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="company">COMPANY</label>
+          <input id="company" name="company" type="text" autocomplete="organization" placeholder="Company name">
+        </div>
+        <div class="field">
+          <label for="site">WEBSITE <small>optional</small></label>
+          <input id="site" name="site" type="url" autocomplete="url" placeholder="https://">
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>WHAT DO YOU NEED?</legend>
+        <div class="chips">
+          <div class="chip"><input type="radio" name="need" id="need-strategy" value="Growth strategy" checked><label for="need-strategy">GROWTH STRATEGY</label></div>
+          <div class="chip"><input type="radio" name="need" id="need-seo" value="SEO &amp; AI search"><label for="need-seo">SEO &amp; AI SEARCH</label></div>
+          <div class="chip"><input type="radio" name="need" id="need-systems" value="AI systems build"><label for="need-systems">AI SYSTEMS BUILD</label></div>
+          <div class="chip"><input type="radio" name="need" id="need-other" value="Something else"><label for="need-other">SOMETHING ELSE</label></div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>WHAT DATA DO YOU HAVE? <small>select any</small></legend>
+        <div class="chips">
+          <div class="chip"><input type="checkbox" name="data" id="d-crm" value="CRM / customer list"><label for="d-crm">CRM / CUSTOMER LIST</label></div>
+          <div class="chip"><input type="checkbox" name="data" id="d-bookings" value="Booking or sales data"><label for="d-bookings">BOOKINGS / SALES</label></div>
+          <div class="chip"><input type="checkbox" name="data" id="d-search" value="Search Console / GA4"><label for="d-search">SEARCH CONSOLE / GA4</label></div>
+          <div class="chip"><input type="checkbox" name="data" id="d-ads" value="Ad accounts"><label for="d-ads">AD ACCOUNTS</label></div>
+          <div class="chip"><input type="checkbox" name="data" id="d-unsure" value="Not sure"><label for="d-unsure">NOT SURE</label></div>
+        </div>
+        <p class="hint">Don't send data yet. This just tells me where to look first.</p>
+      </fieldset>
+
+      <div class="field">
+        <label for="message">WHAT ARE YOU TRYING TO MOVE?</label>
+        <textarea id="message" name="message" placeholder="The one commercial outcome you care about, where it sits now, and what you've already tried." required></textarea>
+        <p class="err" id="message-err"></p>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="send">SEND ENQUIRY</button>
+        <p id="status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </section>
+
+  <aside class="side">
+    <section class="card dark" aria-labelledby="direct-h">
+      <span class="lbl" id="direct-h">Prefer email?</span>
+      <div class="email-row">
+        <span class="email" id="email-text">[YOUR EMAIL]</span>
+        <button type="button" class="copy" id="copy">COPY</button>
+      </div>
+      <dl class="facts">
+        <div><dt>Based in</dt><dd>MELBOURNE, AU</dd></div>
+        <div><dt>Reply within</dt><dd>[X] BUSINESS DAYS</dd></div>
+        <div><dt>Working with</dt><dd>[CLIENTS WORLDWIDE?]</dd></div>
+      </dl>
+    </section>
+
+    <section class="card blue" aria-labelledby="next-h">
+      <h3 id="next-h">WHAT HAPPENS NEXT</h3>
+      <ol class="steps">
+        <li><span class="n">01</span><div><b>I READ IT</b><p>I reply to every enquiry, with a straight answer on whether I can help.</p></div></li>
+        <li><span class="n">02</span><div><b>WE TALK</b><p>A [30]-minute call on the business, the buyer and the data you have.</p></div></li>
+        <li><span class="n">03</span><div><b>I PROPOSE A TEST</b><p>The smallest test that could prove the opportunity wrong, before any bigger engagement.</p></div></li>
+      </ol>
+    </section>
+
+    <section id="elsewhere" class="card white" aria-labelledby="else-h">
+      <span class="lbl muted" id="else-h">Not ready to talk? Read first.</span>
+      <ul class="elsewhere">
+        <li><a href="#top"><b>Case Files</b><span>Mechanisms →</span></a></li>
+        <li><a href="#top"><b>Breakdowns</b><span>Editorial →</span></a></li>
+        <li><a href="#top"><b>Jarvis SEO Brief</b><span>Newsletter →</span></a></li>
+      </ul>
+    </section>
+  </aside>
+</div>
+</div>
+
+<section class="fit" aria-labelledby="fit-h">
+  <div class="max wrap inner">
+    <p class="k">§ Before you write</p>
+    <h2 id="fit-h" class="d">A GOOD FIT <span>IF…</span></h2>
+    <div class="fit-cols">
+      <div class="fit-col yes">
+        <span class="pill out">FIT</span>
+        <h3>YOU'LL GET THE MOST FROM THIS IF</h3>
+        <ul>
+          <li>You have operating data: customers, bookings, referrals or sales.</li>
+          <li>You want a hypothesis tested before you scale spend.</li>
+          <li>You'd rather own the system than rent the tactic.</li>
+        </ul>
+      </div>
+      <div class="fit-col no">
+        <span class="pill out">NOT A FIT</span>
+        <h3>PROBABLY LOOK ELSEWHERE IF</h3>
+        <ul>
+          <li>You need a list of keywords or a content calendar by Friday.</li>
+          <li>The brief is a channel, not a commercial outcome.</li>
+          <li>You want guaranteed rankings.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="max wrap inner">
+    <div>
+      <p>Phil Loney — marketing strategist and systems thinker, Melbourne.</p>
+      <p class="muted" style="font-size:15px">© 2026</p>
+    </div>
+    <div class="fl">
+      <a href="blog.html">Breakdowns</a>
+      <a href="blog.html#subscribe">Jarvis SEO Brief</a>
+      <a href="home.html">phil-loney.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('contact');
+  var status = document.getElementById('status');
+
+  function setErr(id, msg) {
+    var el = document.getElementById(id);
+    var err = document.getElementById(id + '-err');
+    err.textContent = msg || '';
+    if (msg) { el.setAttribute('aria-invalid', 'true'); el.setAttribute('aria-describedby', id + '-err'); }
+    else { el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby'); }
+    return !msg;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('name');
+    var email = document.getElementById('email');
+    var msg = document.getElementById('message');
+    var ok = true;
+    ok = setErr('name', name.value.trim() ? '' : 'Add your name so I know who to reply to.') && ok;
+    ok = setErr('email', email.value.trim() && email.checkValidity() ? '' : 'Enter an email address, like you@company.com.') && ok;
+    ok = setErr('message', msg.value.trim() ? '' : 'Tell me what you are trying to move, even in one line.') && ok;
+    if (!ok) {
+      status.textContent = '';
+      var first = form.querySelector('[aria-invalid=true]');
+      if (first) first.focus();
+      return;
+    }
+    status.textContent = 'Template preview: this form is not connected yet, so nothing was sent.';
+  });
+
+  document.getElementById('copy').addEventListener('click', function () {
+    var btn = this;
+    var text = document.getElementById('email-text').textContent;
+    function done(label) { btn.textContent = label; setTimeout(function () { btn.textContent = 'COPY'; }, 1800); }
+    function fallback() {
+      var r = document.createRange();
+      r.selectNodeContents(document.getElementById('email-text'));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      done('SELECTED');
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { done('COPIED'); }, fallback);
+      } else { fallback(); }
+    } catch (err) { fallback(); }
+  });
+})();
+</script>
+
+</body></html>

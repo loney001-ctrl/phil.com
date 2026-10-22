@@ -1,0 +1,348 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="robots" content="noindex,nofollow">
+<title>Phil Loney — Homepage</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+/* Layout: 1440 max column with full-bleed black banners; asymmetric 12-col grids collapse to one column on phones. Single light look by choice (phil-loney.com). */
+:root{
+  --bg:#F5F5F7; --ink:#0A0A0A; --paper:#FFFFFF; --muted:#6B6B72; --body2:#3A3A40;
+  --primary:#1E3BC8; --accent:#B8FF00;
+  --on-dark:#F5F5F7; --dark-muted:#9A9AA2; --dark-body:#D6D6DB; --on-primary-muted:#DCE1FA; --on-primary-body:#E8EBFB;
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --gutter:clamp(16px,5.5vw,80px); --gutter-wide:clamp(16px,3.3vw,48px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5;overflow-x:hidden}
+a{color:var(--ink)} a:hover{color:var(--primary)}
+:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+h1,h2,h3,p,blockquote{margin:0}
+h1,h2,h3{text-wrap:balance}
+.d{font-family:var(--display);font-weight:900;letter-spacing:-0.045em;line-height:0.9}
+.max{max-width:1440px;margin:0 auto}
+.wrap{padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+.wrap-wide{padding-left:max(var(--gutter-wide),env(safe-area-inset-left,0px));padding-right:max(var(--gutter-wide),env(safe-area-inset-right,0px))}
+.muted{color:var(--muted)}
+.blue{color:var(--primary)} .lime{color:var(--accent)}
+.pill{display:inline-block;align-self:flex-start;background:var(--accent);color:var(--ink);border-radius:999px;padding:7px 14px;font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em;white-space:nowrap}
+.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
+
+/* nav */
+header{padding-block:32px 0}
+nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 28px;border:1.5px solid var(--ink);border-radius:32px}
+.brand{font-family:var(--display);font-size:18px;font-weight:900;letter-spacing:-0.01em;text-decoration:none}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 36px}
+.links a{text-decoration:none}
+.btn-sub{background:var(--primary);color:var(--on-dark)!important;border-radius:999px;padding:15px 26px;font-family:var(--display);font-size:14px;font-weight:800;letter-spacing:0.06em;text-decoration:none}
+
+/* hero */
+.hero{position:relative;padding-block:112px 128px;row-gap:56px}
+.hero .k{grid-column:1 / -1;font-size:16px;color:var(--muted)}
+.hero h1{grid-column:1 / -1;font-size:clamp(56px,11vw,160px);line-height:0.88;letter-spacing:-0.05em}
+.hero .lede{grid-column:1 / span 6;font-size:clamp(21px,1.9vw,26px);line-height:1.5}
+.signals{grid-column:9 / span 4;display:flex;flex-direction:column}
+.signals p{margin-bottom:12px;font-size:15px;color:var(--muted)}
+.signals div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1.5px solid var(--ink);padding:14px 0}
+.signals div:last-child{border-bottom:1.5px solid var(--ink)}
+.signals b{font-family:var(--display);font-size:20px;font-weight:800}
+.signals span{font-size:15px;color:var(--muted)}
+.sticker{position:absolute;top:168px;right:max(calc(var(--gutter) + 16px),env(safe-area-inset-right,0px));width:172px;height:172px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;text-align:center;transform:rotate(-14deg);font-family:var(--display);font-size:17px;font-weight:900;line-height:1.05;letter-spacing:0.02em}
+@media (max-width:1100px){.sticker{display:none}}
+@media (max-width:900px){.hero .lede,.signals{grid-column:1 / -1}}
+
+/* banners */
+.band{background:var(--ink);color:var(--on-dark);overflow:hidden}
+.signal-band .inner{position:relative;min-height:480px;display:flex;flex-direction:column;justify-content:space-between;padding-block:48px 0}
+.signal-band p{align-self:flex-end;max-width:460px;text-align:right;font-size:17px;color:var(--dark-muted)}
+.signal-band h2{margin:40px 0 -0.09em;font-size:clamp(110px,26vw,380px);line-height:0.8;letter-spacing:-0.06em}
+.scale-band .inner{padding-block:120px 96px;display:flex;flex-direction:column}
+.scale-band h2{font-size:clamp(84px,17vw,250px);line-height:0.84;letter-spacing:-0.06em}
+.scale-band h2 + h2{text-align:right}
+.scale-band p{margin-top:56px;font-size:17px;color:var(--dark-muted)}
+
+/* philosophy */
+.philo{padding-block:176px 160px;row-gap:48px}
+.philo .q{grid-column:1 / span 7;display:flex;flex-direction:column;gap:32px}
+.philo blockquote{font-family:var(--display);font-size:clamp(36px,4.2vw,60px);font-weight:800;line-height:1;letter-spacing:-0.03em}
+.philo .body{grid-column:9 / span 4;padding-top:72px;display:flex;flex-direction:column;gap:24px}
+.philo .body p{font-size:20px;line-height:1.6}
+.philo .body p.muted{font-size:15px}
+@media (max-width:900px){.philo .q,.philo .body{grid-column:1 / -1}.philo .body{padding-top:0}}
+
+/* section heads */
+.shead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px}
+.shead p{max-width:420px;font-size:18px;line-height:1.55;color:var(--muted)}
+
+/* case files */
+.cases{padding-block:72px 24px}
+.cases .shead{padding-inline:clamp(0px,2.2vw,32px)}
+.cases h2{font-size:clamp(56px,6.7vw,96px)}
+.case-grid{margin-top:40px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:1100px){.case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.case-grid{grid-template-columns:minmax(0,1fr)}}
+.case{border-radius:40px;padding:36px;min-height:640px;display:flex;flex-direction:column;gap:22px}
+.case .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.case .top span:last-child{font-size:15px}
+.case h3{font-family:var(--display);font-size:clamp(36px,3.2vw,46px);font-weight:900;line-height:0.95;letter-spacing:-0.03em}
+.case p{font-size:18px;line-height:1.55}
+.case .grow{flex-grow:1}
+.case .res{border-top:1.5px solid currentColor;padding-top:20px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.case .res b{font-family:var(--display);font-size:clamp(46px,4.2vw,60px);font-weight:900;line-height:0.9;letter-spacing:-0.04em;font-variant-numeric:tabular-nums}
+.case .res span{font-size:15px;text-align:right}
+.c-blue{background:var(--primary);color:var(--on-dark)} .c-blue .top span:last-child,.c-blue .res span{color:var(--on-primary-muted)} .c-blue p{color:var(--on-primary-body)}
+.c-dark{background:var(--ink);color:var(--on-dark)} .c-dark .top span:last-child,.c-dark .res span{color:var(--dark-muted)} .c-dark p{color:var(--dark-body)} .c-dark .res b{color:var(--accent)}
+.c-white{background:var(--paper);border:1.5px solid var(--ink)} .c-white .top span:last-child,.c-white .res span{color:var(--muted)} .c-white p{color:var(--body2)} .c-white .res b{color:var(--primary)}
+
+/* principle */
+.principle{padding-block:40px 176px;padding-left:max(clamp(16px,11vw,160px),env(safe-area-inset-left,0px));padding-right:max(clamp(16px,11vw,160px),env(safe-area-inset-right,0px))}
+.pbox{position:relative;border:1.5px solid var(--ink);border-radius:64px;padding:clamp(48px,6vw,88px) clamp(28px,6.7vw,96px)}
+.pbox .pill{position:absolute;top:-18px;right:clamp(24px,6vw,88px);font-size:13px;padding:8px 18px}
+.pbox p{margin-bottom:28px;font-size:16px;color:var(--muted)}
+.pbox h3{font-family:var(--display);font-size:clamp(40px,6vw,88px);font-weight:900;line-height:0.92;letter-spacing:-0.04em}
+
+/* method */
+.method{padding-block:144px 120px}
+.method .g12{row-gap:32px}
+.method h2{grid-column:1 / span 7;font-size:clamp(56px,7.2vw,104px)}
+.method .intro{grid-column:9 / span 4;align-self:end;font-size:20px;line-height:1.6}
+@media (max-width:900px){.method h2,.method .intro{grid-column:1 / -1}}
+.steps{margin-top:64px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.step{border-radius:32px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.step .n{font-family:var(--display);font-weight:900;line-height:0.8;letter-spacing:-0.05em;font-size:72px}
+.step h3{font-family:var(--display);font-size:28px;font-weight:800;line-height:1}
+.step p{font-size:18px;line-height:1.5}
+.step .txt{display:flex;flex-direction:column;gap:10px}
+.s-dark{background:var(--ink);color:var(--on-dark)} .s-dark p{color:var(--dark-body)}
+.s-blue{background:var(--primary);color:var(--on-dark)} .s-blue p{color:var(--on-primary-body)}
+.s-line{border:1.5px solid var(--ink)} .s-line p{color:var(--body2)}
+.s-white{background:var(--paper);border:1.5px solid var(--ink)} .s-white p{color:var(--body2)}
+.big .n{font-size:clamp(96px,10vw,160px)} .big h3{font-size:34px}
+.st1{grid-column:span 5;min-height:380px}
+.st2{grid-column:span 4;min-height:260px;align-self:end}
+.st3{grid-column:span 3;min-height:380px}
+.st4{grid-column:span 3;min-height:240px;align-self:start}
+.st5{grid-column:span 4;min-height:330px} .st5 .n{font-size:96px}
+.st6{grid-column:span 5;min-height:330px} .st6 .n{font-size:128px;color:var(--accent)} .st6 h3{font-size:34px}
+.st7{grid-column:span 4;min-height:260px;align-self:start}
+.st8{grid-column:span 3;min-height:260px;align-self:end}
+.st9{grid-column:span 5;min-height:360px}
+.st6 .row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+@media (max-width:1000px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.step{grid-column:auto!important;align-self:stretch!important;min-height:260px!important}}
+@media (max-width:600px){.steps{grid-template-columns:minmax(0,1fr)}}
+
+/* systems */
+.systems{padding-block:40px 144px}
+.systems .shead{padding-inline:clamp(0px,2.2vw,32px)}
+.systems h2{font-size:clamp(44px,6vw,88px);line-height:0.92}
+.sys-grid{margin-top:48px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.corpus{grid-column:span 7;min-height:740px;border-radius:48px;padding:clamp(28px,3.4vw,48px);background:var(--ink);color:var(--on-dark);display:flex;flex-direction:column;gap:28px}
+.side{grid-column:span 5;display:flex;flex-direction:column;gap:16px}
+@media (max-width:1000px){.corpus,.side{grid-column:1 / -1}.corpus{min-height:0}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.corpus .top span:last-child{font-size:15px;color:var(--dark-muted)}
+.corpus h3{font-family:var(--display);font-size:clamp(32px,3vw,44px);font-weight:800;line-height:1;letter-spacing:-0.02em}
+.corpus .grow{flex-grow:1}
+.corpus .nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.corpus .nums div{border-top:1.5px solid var(--on-dark);padding-top:20px;display:flex;flex-direction:column;gap:12px}
+.corpus .nums b{font-family:var(--display);font-size:clamp(64px,11vw,168px);font-weight:900;line-height:0.82;letter-spacing:-0.06em;font-variant-numeric:tabular-nums}
+.corpus .nums div:first-child b{color:var(--accent)}
+.corpus .nums span{font-size:18px;color:var(--dark-body)}
+.corpus > p{max-width:620px;font-size:20px;line-height:1.6;color:var(--dark-body)}
+.sys{border-radius:48px;padding:40px;display:flex;flex-direction:column;gap:20px}
+.sys h3{font-family:var(--display);font-size:34px;font-weight:800;line-height:1;letter-spacing:-0.02em}
+.sys p{font-size:18px;line-height:1.55}
+.sys.blue{flex-grow:1;background:var(--primary);color:var(--on-dark)} .sys.blue p{color:var(--on-primary-body)}
+.sys.white{background:var(--paper);border:1.5px solid var(--ink)} .sys.white p{color:var(--body2)} .sys.white .top span:last-child{font-size:15px;color:var(--muted)}
+.gates{display:flex;flex-wrap:wrap;gap:8px}
+.gates span{border:1.5px solid var(--on-dark);border-radius:999px;padding:6px 12px;font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:0.04em}
+
+/* cta */
+.cta .inner{padding-block:176px 160px;display:flex;flex-direction:column;gap:48px}
+.cta .k{font-size:17px;color:var(--dark-muted)}
+.cta h2{font-size:clamp(52px,8vw,116px);line-height:0.88;letter-spacing:-0.05em}
+.cta .row{display:flex;flex-wrap:wrap;align-items:center;gap:24px 32px}
+.btn-work{background:var(--accent);color:var(--ink)!important;border-radius:8px;padding:24px 40px;font-family:var(--display);font-size:18px;font-weight:900;letter-spacing:0.06em;text-decoration:none}
+.btn-work:focus-visible{outline-color:var(--accent)}
+.cta .row p{font-size:18px;color:#B5B5BC}
+.cta .row p span{color:var(--on-dark);user-select:all}
+.cta .note{max-width:640px;font-size:22px;line-height:1.55;color:var(--dark-body)}
+
+footer .inner{padding-block:48px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
+footer .fl{display:flex;flex-wrap:wrap;gap:12px 32px}
+</style>
+
+<div class="max">
+<header class="wrap">
+  <nav aria-label="Primary">
+    <a href="home.html" class="brand">PHIL LONEY</a>
+    <div class="links">
+      <a href="case-files.html">Case Studies</a>
+      <a href="about.html">About Me</a>
+      <a href="blog.html">Blog</a>
+      <a href="blog.html#subscribe" class="btn-sub">SUBSCRIBE</a>
+    </div>
+  </nav>
+</header>
+
+<section id="top" class="hero wrap g12">
+  <p class="k">Melbourne · Marketing strategist · Systems thinker · AI-native operator</p>
+  <h1 class="d">AI FIRST<br><span class="blue">MARKETING STRATEGIST.</span></h1>
+  <p class="lede">I find the commercial signal other marketers miss, turn it into a system you can test, then build the AI infrastructure to run that system at scale.</p>
+  <div class="signals">
+    <p>Signals I look for first</p>
+    <div><b>REFERRAL DENSITY</b><span>01</span></div>
+    <div><b>CUSTOMER CONCENTRATION</b><span>02</span></div>
+    <div><b>ICP BEHAVIOUR</b><span>03</span></div>
+  </div>
+  <div class="sticker" aria-hidden="true">TEST,<br>VALIDATE<br>&amp; SCALE</div>
+</section>
+</div>
+
+<section class="band signal-band">
+  <div class="max wrap inner">
+    <p>§01 — It's usually already in the data, priced as noise.</p>
+    <h2 class="d">SIGNAL<span class="lime">.</span></h2>
+  </div>
+</section>
+
+<div class="max">
+<section id="about" class="philo wrap g12">
+  <div class="q">
+    <span class="pill">PRINCIPLE</span>
+    <blockquote>Don't start with the tactic. Find the mechanism, test the hypothesis, understand the system, then extract the principle.</blockquote>
+  </div>
+  <div class="body">
+    <p>Most marketing starts at the output — a channel, a format, a keyword list — and works backwards to a justification. That order is why so much of it fails quietly.</p>
+    <p>I start with the operating data: who refers whom, which customers carry the revenue, what a single booking actually represents. Once the mechanism has a name, it becomes a hypothesis you can test, a system you can instrument, and a principle that transfers to the next business.</p>
+    <p class="muted">Method → Mechanism → Principle</p>
+  </div>
+</section>
+
+<section id="work" class="cases wrap-wide">
+  <div class="shead">
+    <h2 class="d">CASE FILES</h2>
+    <p>Three mechanisms. Each one was sitting in data the client already had.</p>
+  </div>
+  <div class="case-grid">
+    <article class="case c-blue">
+      <div class="top"><span class="pill">BUYING SIGNAL</span><span>Real Estate BPO</span></div>
+      <h3>FROM 1–3% TO 25% CONVERSION RATE</h3>
+      <p>Designed a cold email outreach campaign targeting customers that showed signals they were ready to hear our offer. Used personalisation for an 80%+ open rate.</p>
+      <div class="grow"></div>
+      <div class="res"><b>+1,900%</b><span>conversion<br>rate increase</span></div>
+    </article>
+    <article class="case c-dark">
+      <div class="top"><span class="pill">LEVERAGE</span><span>Bersih Co Cleaning</span></div>
+      <h3>100% INCREASE IN SQ LEADS</h3>
+      <p>Found an under-utilised asset that turned out to be the greatest strength in their marketing: their database. Designed an outreach campaign around it.</p>
+      <div class="grow"></div>
+      <div class="res"><b>+60%</b><span>year's revenue<br>increase</span></div>
+    </article>
+    <article class="case c-white">
+      <div class="top"><span class="pill">DENSITY MODEL</span><span>Costume Supercentre</span></div>
+      <h3>RANK SUBURBS BY DEMAND, NOT VOLUME.</h3>
+      <p>Childcare first aid demand clusters where centres, educators and young families concentrate. Suburbs were scored on that density and rolled out in tiers: full pages where demand is real, hub pages where it isn't.</p>
+      <div class="grow"></div>
+      <div class="res"><b>[RESULT]</b><span>[Add figure:<br>leads or bookings per tier]</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="principle">
+  <div class="pbox">
+    <span class="pill">PRINCIPLE EXTRACTED</span>
+    <p>What all three cases have in common</p>
+    <h3>SEARCH DEMAND IS <span class="blue">NOT ALWAYS</span> THE BEST PROXY FOR OPPORTUNITY.</h3>
+  </div>
+</section>
+</div>
+
+<section class="band scale-band">
+  <div class="max wrap inner">
+    <h2 class="d">SYSTEMS</h2>
+    <h2 class="d lime">AT SCALE.</h2>
+    <p>§02 — A principle is only useful once it runs without you.</p>
+  </div>
+</section>
+
+<div class="max">
+<section id="method" class="method wrap">
+  <div class="g12">
+    <h2 class="d">NINE STEPS. IN THIS ORDER.</h2>
+    <p class="intro">The sequence matters more than any single step. Jump to testing before you've found the opportunity and you're optimising noise.</p>
+  </div>
+  <div class="steps">
+    <div class="step s-dark big st1"><span class="n">01</span><div class="txt"><h3>UNDERSTAND</h3><p>The business, the buyer, the unit economics. Before anything else.</p></div></div>
+    <div class="step s-line st2"><span class="n">02</span><div class="txt"><h3>IDENTIFY OBJECTIVE</h3><p>One commercial outcome, stated so it can be measured.</p></div></div>
+    <div class="step s-blue st3"><span class="n">03</span><div class="txt"><h3>FIND OPPORTUNITY</h3><p>Look where others don't: referral patterns, concentration, booking behaviour.</p></div></div>
+    <div class="step s-line st4"><span class="n">04</span><div class="txt"><h3>HYPOTHESIS</h3><p>If the mechanism is real, this metric moves. Write it down first.</p></div></div>
+    <div class="step s-white st5"><span class="n">05</span><div class="txt"><h3>UNDERSTAND COMPONENTS</h3><p>Break the system into parts you can instrument and change one at a time.</p></div></div>
+    <div class="step s-dark st6"><div class="row"><span class="n">06</span><span class="pill">WHERE MOST START</span></div><div class="txt"><h3>TEST</h3><p>The smallest test that could prove you wrong.</p></div></div>
+    <div class="step s-line st7"><span class="n">07</span><div class="txt"><h3>DIAGNOSE</h3><p>Read what the result is telling you, not what you hoped.</p></div></div>
+    <div class="step s-white st8"><span class="n">08</span><div class="txt"><h3>OPTIMISE</h3><p>Improve the mechanism, not the surface tactic.</p></div></div>
+    <div class="step s-blue big st9"><span class="n">09</span><div class="txt"><h3>EXTRACT PRINCIPLE</h3><p>Name the transferable rule, so the next business starts at step three.</p></div></div>
+  </div>
+</section>
+
+<section id="systems" class="systems wrap-wide">
+  <div class="shead">
+    <h2 class="d">AI-NATIVE ISN'T A CLAIM.<br>IT'S INFRASTRUCTURE.</h2>
+    <p>Systems I've built and run. Each one executes the method above without me in the loop.</p>
+  </div>
+  <div class="sys-grid">
+    <article class="corpus">
+      <div class="top"><span class="pill">CORPUS</span><span>Built on Supabase</span></div>
+      <h3>STARTUP INTELLIGENCE DATABASE</h3>
+      <div class="grow"></div>
+      <div class="nums">
+        <div><b>400+</b><span>case studies</span></div>
+        <div><b>200+</b><span>founder interviews</span></div>
+      </div>
+      <p>A structured record of how companies actually found growth, queryable by mechanism rather than by headline. It's the evidence base every other system draws on.</p>
+    </article>
+    <div class="side">
+      <article class="sys blue">
+        <span class="pill">SYSTEM</span>
+        <h3>CONTENT PRODUCTION PIPELINE</h3>
+        <p>Brief to approved draft in one sequenced job. Every stage is a gate: a draft that fails one doesn't move to the next.</p>
+        <div class="gates"><span>1 INTENT BRIEF</span><span>2 GAP ANALYSIS</span><span>3 DRAFT</span><span>4 SCORE GATE</span><span>5 HELPFUL-CONTENT</span><span>6 READABILITY</span></div>
+      </article>
+      <article class="sys white">
+        <div class="top"><span class="pill">PRODUCT</span><span>Phil AI</span></div>
+        <h3>GTM REPORT GENERATOR</h3>
+        <p>Go-to-market reports for bootstrapped B2B SaaS founders, grounded in what worked for comparable companies in the corpus.</p>
+      </article>
+    </div>
+  </div>
+</section>
+</div>
+
+<section id="contact" class="band cta">
+  <div class="max wrap inner">
+    <p class="k">§03 — Work with me</p>
+    <h2 class="d">BRING THE DATA.<br><span class="lime">I'LL FIND THE SIGNAL.</span></h2>
+    <div class="row">
+      <a href="contact.html" class="btn-work">WORK WITH ME</a>
+      <p>or email <span>[YOUR EMAIL]</span></p>
+    </div>
+    <p class="note">Strategy engagements for operators who'd rather test a mechanism than buy another tactic. Based in Melbourne.</p>
+  </div>
+</section>
+
+<footer id="blog">
+  <div class="max wrap inner">
+    <div>
+      <p>Phil Loney — marketing strategist and systems thinker, Melbourne.</p>
+      <p class="muted" style="font-size:15px">© 2026</p>
+    </div>
+    <div class="fl">
+      <a href="blog.html">Breakdowns</a>
+      <a href="blog.html#subscribe">Jarvis SEO Brief</a>
+      <a href="home.html">phil-loney.com</a>
+    </div>
+  </div>
+</footer>
+
+</body></html>

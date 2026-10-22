@@ -1,0 +1,576 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="robots" content="noindex,nofollow">
+<title>About Phil Loney</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+/* Layout: same system as the homepage. 1440 max column, full-bleed black banners, asymmetric 12-col grids that stack on phones. Single light look by choice. */
+:root{
+  --bg:#F5F5F7; --ink:#0A0A0A; --paper:#FFFFFF; --muted:#6B6B72; --body2:#3A3A40; --portrait:#D9D9DB;
+  --primary:#1E3BC8; --accent:#B8FF00;
+  --on-dark:#F5F5F7; --dark-muted:#9A9AA2; --dark-body:#D6D6DB; --on-primary-muted:#DCE1FA; --on-primary-body:#E8EBFB;
+  --display:'Inter Tight','Helvetica Neue',Arial,sans-serif;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --gutter:clamp(16px,5.5vw,80px); --gutter-wide:clamp(16px,3.3vw,48px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.5;overflow-x:hidden}
+a{color:var(--ink)} a:hover{color:var(--primary)}
+:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+h1,h2,h3,p,blockquote,dl,dd,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+h1,h2,h3{text-wrap:balance}
+.d{font-family:var(--display);font-weight:900;letter-spacing:-0.045em;line-height:0.9}
+.max{max-width:1440px;margin:0 auto}
+.wrap{padding-left:max(var(--gutter),env(safe-area-inset-left,0px));padding-right:max(var(--gutter),env(safe-area-inset-right,0px))}
+.wrap-wide{padding-left:max(var(--gutter-wide),env(safe-area-inset-left,0px));padding-right:max(var(--gutter-wide),env(safe-area-inset-right,0px))}
+.muted{color:var(--muted)}
+.blue{color:var(--primary)} .lime{color:var(--accent)}
+.pill{display:inline-block;align-self:flex-start;background:var(--accent);color:var(--ink);border-radius:999px;padding:7px 14px;font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em;white-space:nowrap}
+.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
+.prose{display:flex;flex-direction:column;gap:20px;max-width:640px}
+.prose p{font-size:20px;line-height:1.6}
+
+/* nav */
+header{padding-block:32px 0}
+nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 28px;border:1.5px solid var(--ink);border-radius:32px}
+.brand{font-family:var(--display);font-size:18px;font-weight:900;letter-spacing:-0.01em;text-decoration:none}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 36px}
+.links a{text-decoration:none}
+.links a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.btn-sub{background:var(--primary);color:var(--on-dark)!important;border-radius:999px;padding:15px 26px;font-family:var(--display);font-size:14px;font-weight:800;letter-spacing:0.06em;text-decoration:none}
+
+/* hero */
+.hero{padding-block:96px 120px;row-gap:48px;align-items:start}
+.hero .k{grid-column:1 / -1;font-size:16px;color:var(--muted)}
+.hero .intro{grid-column:1 / span 7;display:flex;flex-direction:column;gap:40px;min-width:0}
+.hero h1{font-size:clamp(64px,10.5vw,152px);line-height:0.86;letter-spacing:-0.05em}
+.hero .role{font-family:var(--display);font-size:clamp(24px,2.4vw,34px);font-weight:800;line-height:1.05;letter-spacing:-0.02em}
+.hero .lede{display:flex;flex-direction:column;gap:20px;max-width:620px}
+.hero .lede p{font-size:clamp(19px,1.6vw,22px);line-height:1.55}
+.portrait{grid-column:9 / span 4;position:relative;display:flex;flex-direction:column;gap:12px}
+.portrait .frame{background:var(--portrait);border-radius:48px;overflow:hidden;border:1.5px solid var(--ink)}
+.portrait img{display:block;width:100%;height:auto;aspect-ratio:764 / 883}
+.portrait figcaption{font-size:15px;color:var(--muted)}
+.portrait .sticker{position:absolute;left:-44px;bottom:72px;width:132px;height:132px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;text-align:center;transform:rotate(-14deg);font-family:var(--display);font-size:14px;font-weight:900;line-height:1.05;letter-spacing:0.02em}
+.facts{grid-column:1 / -1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 24px;margin-top:24px}
+.facts div{border-top:1.5px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.facts dt{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em;color:var(--muted)}
+.facts dd{font-size:17px;line-height:1.4}
+@media (max-width:1100px){.facts{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:24px}.portrait .sticker{left:auto;right:-8px;bottom:-24px}}
+@media (max-width:900px){.hero .intro,.portrait{grid-column:1 / -1}.portrait{max-width:420px}}
+@media (max-width:600px){.facts{grid-template-columns:minmax(0,1fr)}.portrait .sticker{width:108px;height:108px;font-size:12px;right:-4px}}
+
+/* banners */
+.band{background:var(--ink);color:var(--on-dark);overflow:hidden}
+.title-band .inner{min-height:420px;display:flex;flex-direction:column;justify-content:space-between;padding-block:48px 0}
+.title-band p{align-self:flex-end;max-width:460px;text-align:right;font-size:17px;color:var(--dark-muted)}
+.title-band h2{margin:40px 0 -0.09em;font-size:clamp(96px,22vw,330px);line-height:0.8;letter-spacing:-0.06em}
+
+/* section heads */
+.shead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px}
+.shead h2{font-size:clamp(48px,6.4vw,92px)}
+.shead p{max-width:440px;font-size:18px;line-height:1.55;color:var(--muted)}
+
+/* path */
+.path{padding-block:144px 64px}
+.path .g12{row-gap:40px}
+.path h2{grid-column:1 / span 6;font-size:clamp(52px,6.6vw,96px)}
+.path .prose{grid-column:8 / span 5;align-self:end}
+@media (max-width:900px){.path h2,.path .prose{grid-column:1 / -1}}
+.stages{margin-top:64px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:end}
+.stage{border-radius:32px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;border:1.5px solid var(--ink)}
+.stage .lbl{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em}
+.stage h3{font-family:var(--display);font-size:28px;font-weight:800;line-height:1;letter-spacing:-0.01em}
+.stage p{font-size:17px;line-height:1.5;color:var(--body2)}
+.stage:nth-child(1){min-height:220px}
+.stage:nth-child(2){min-height:260px}
+.stage:nth-child(3){min-height:300px;background:var(--paper)}
+.stage:nth-child(4){min-height:340px;background:var(--ink);color:var(--on-dark);border-color:var(--ink)}
+.stage:nth-child(4) p{color:var(--dark-body)} .stage:nth-child(4) .lbl{color:var(--accent)}
+@media (max-width:1000px){.stages{grid-template-columns:repeat(2,minmax(0,1fr))}.stage{min-height:220px!important}}
+@media (max-width:560px){.stages{grid-template-columns:minmax(0,1fr)}}
+
+/* lesson */
+.lesson{padding-block:96px 48px;row-gap:48px}
+.lesson .head{grid-column:1 / span 5;display:flex;flex-direction:column;gap:28px}
+.lesson h2{font-size:clamp(44px,5.2vw,76px);line-height:0.92}
+.lesson .prose{grid-column:7 / span 6}
+.lesson q{font-style:italic}
+@media (max-width:900px){.lesson .head,.lesson .prose{grid-column:1 / -1}}
+.outcome{grid-column:1 / -1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.out{border-radius:40px;padding:36px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:260px}
+.out b{font-family:var(--display);font-size:clamp(64px,8vw,120px);font-weight:900;line-height:0.85;letter-spacing:-0.05em;font-variant-numeric:tabular-nums}
+.out span{font-size:18px;line-height:1.45}
+.out.a{grid-column:span 4;background:var(--primary);color:var(--on-dark)} .out.a span{color:var(--on-primary-body)}
+.out.b{grid-column:span 3;border:1.5px solid var(--ink)} .out.b b{font-size:clamp(44px,4.6vw,68px)} .out.b span{color:var(--body2)}
+.out.c{grid-column:span 5;background:var(--ink);color:var(--on-dark)} .out.c span{color:var(--dark-body)}
+.out.c .k{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em;color:var(--accent)}
+.out.c p{font-family:var(--display);font-size:clamp(26px,2.4vw,34px);font-weight:800;line-height:1.05;letter-spacing:-0.02em}
+@media (max-width:1000px){.out.a,.out.b,.out.c{grid-column:1 / -1}.out{min-height:0}}
+
+/* signals */
+.signals{padding-block:120px 48px}
+.sig-grid{margin-top:40px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.card{border-radius:40px;padding:36px;display:flex;flex-direction:column;gap:22px}
+.card .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.card .top span:last-child{font-size:15px}
+.card h3{font-family:var(--display);font-size:clamp(34px,3.2vw,46px);font-weight:900;line-height:0.95;letter-spacing:-0.03em}
+.card p{font-size:18px;line-height:1.55}
+.card .grow{flex-grow:1}
+.card .res{border-top:1.5px solid currentColor;padding-top:20px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.card .res b{font-family:var(--display);font-size:clamp(52px,5vw,72px);font-weight:900;line-height:0.9;letter-spacing:-0.04em;font-variant-numeric:tabular-nums}
+.card .res span{font-size:15px;max-width:260px}
+.c-dark{grid-column:span 7;background:var(--ink);color:var(--on-dark)} .c-dark .top span:last-child,.c-dark .res span{color:var(--dark-muted)} .c-dark p{color:var(--dark-body)} .c-dark .res b{color:var(--accent)}
+.c-white{grid-column:span 5;background:var(--paper);border:1.5px solid var(--ink)} .c-white .top span:last-child{color:var(--muted)} .c-white p{color:var(--body2)}
+.c-white .note{font-size:15px;color:var(--muted);border-top:1.5px solid var(--ink);padding-top:20px}
+@media (max-width:1000px){.c-dark,.c-white{grid-column:1 / -1}}
+
+.model{margin-top:16px;border:1.5px solid var(--ink);border-radius:40px;padding:clamp(28px,3.4vw,48px);display:flex;flex-direction:column;gap:28px}
+.model .row{display:flex;flex-direction:column;gap:12px}
+.model .lbl{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em;color:var(--muted)}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.chain li{border-radius:999px;padding:10px 18px;font-family:var(--display);font-size:clamp(15px,1.3vw,18px);font-weight:800;letter-spacing:0.01em}
+.chain .ar{padding:0;font-size:20px}
+.chain.mine li:not(.ar){background:var(--primary);color:var(--on-dark)}
+.chain.mine li:last-child{background:var(--accent);color:var(--ink)}
+.chain.old li:not(.ar){border:1.5px solid var(--muted);color:var(--muted)}
+.chain.old .ar{color:var(--muted)}
+
+.more{margin-top:16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.more li{border-top:1.5px solid var(--ink);padding:18px 0;display:flex;flex-direction:column;gap:6px}
+.more b{font-family:var(--display);font-size:22px;font-weight:800;letter-spacing:-0.01em}
+.more span{font-size:17px;color:var(--body2)}
+@media (max-width:700px){.more{grid-template-columns:minmax(0,1fr)}}
+
+/* ai */
+.ai{padding-block:144px 64px}
+.ai .g12{row-gap:40px}
+.ai h2{grid-column:1 / span 7;font-size:clamp(48px,6.2vw,92px)}
+.ai .prose{grid-column:9 / span 4;align-self:end}
+.ai .prose p{font-size:18px}
+@media (max-width:900px){.ai h2,.ai .prose{grid-column:1 / -1}}
+.scale{margin-top:56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.lvl{border-radius:32px;padding:28px;display:flex;flex-direction:column;gap:14px;border:1.5px solid var(--ink);min-height:220px}
+.lvl h3{font-family:var(--display);font-size:30px;font-weight:900;letter-spacing:-0.02em;line-height:1}
+.lvl p{font-size:17px;color:var(--body2)}
+.lvl.now{background:var(--accent);border-color:var(--ink)}
+.lvl.now p{color:var(--ink)}
+.lvl.goal{background:var(--ink);color:var(--on-dark)} .lvl.goal p{color:var(--dark-body)}
+.lvl .tag{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em}
+.lvl.goal .tag{color:var(--accent)}
+@media (max-width:800px){.scale{grid-template-columns:minmax(0,1fr)}.lvl{min-height:0}}
+
+.builds{padding-block:48px 120px}
+.b-grid{margin-top:40px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.bx{border-radius:40px;padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;gap:20px;min-width:0}
+.bx .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.bx .top span:last-child{font-size:15px}
+.bx h3{font-family:var(--display);font-size:clamp(30px,2.8vw,40px);font-weight:900;line-height:0.95;letter-spacing:-0.03em}
+.bx p{font-size:18px;line-height:1.55}
+.bx .grow{flex-grow:1}
+.bx .nums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.bx .nums div{border-top:1.5px solid currentColor;padding-top:16px;display:flex;flex-direction:column;gap:8px}
+.bx .nums b{font-family:var(--display);font-size:clamp(44px,5.4vw,84px);font-weight:900;line-height:0.85;letter-spacing:-0.05em;font-variant-numeric:tabular-nums}
+.bx .nums span{font-size:16px}
+.bx.blue{grid-column:span 7;background:var(--primary);color:var(--on-dark)} .bx.blue p,.bx.blue .nums span{color:var(--on-primary-body)} .bx.blue .top span:last-child{color:var(--on-primary-muted)}
+.bx.dark{grid-column:span 5;background:var(--ink);color:var(--on-dark)} .bx.dark p,.bx.dark .nums span{color:var(--dark-body)} .bx.dark .top span:last-child{color:var(--dark-muted)} .bx.dark .nums div:first-child b{color:var(--accent)}
+.bx.white{grid-column:span 4;background:var(--paper);border:1.5px solid var(--ink)} .bx.white p{color:var(--body2)} .bx.white .top span:last-child{color:var(--muted)}
+.bx.line{grid-column:span 8;border:1.5px solid var(--ink)} .bx.line p{color:var(--body2)} .bx.line .top span:last-child{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips li{border:1.5px solid currentColor;border-radius:999px;padding:6px 12px;font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:0.04em}
+.loop{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.loop li{border-radius:999px;padding:7px 13px;font-family:var(--display);font-size:13px;font-weight:800;background:var(--bg);border:1.5px solid var(--ink)}
+.loop li.ev{background:var(--accent)}
+.loop .ar{background:none;border:0;padding:0;color:var(--muted)}
+.bx.span12{grid-column:1 / -1}
+@media (max-width:1000px){.bx.blue,.bx.dark,.bx.white,.bx.line{grid-column:1 / -1}}
+.toolkit{margin-top:32px;display:flex;flex-direction:column;gap:14px}
+.toolkit p{font-size:15px;color:var(--muted)}
+.toolkit .chips li{color:var(--ink)}
+
+/* challenge */
+.challenge{padding-block:120px 96px;row-gap:48px}
+.challenge .left{grid-column:1 / span 6;display:flex;flex-direction:column;gap:28px}
+.challenge h2{font-size:clamp(48px,5.6vw,84px)}
+.challenge ol{display:flex;flex-direction:column;counter-reset:s}
+.challenge ol li{counter-increment:s;display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:baseline;border-top:1.5px solid var(--ink);padding:16px 0;font-size:19px}
+.challenge ol li:last-child{border-bottom:1.5px solid var(--ink)}
+.challenge ol li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);font-size:22px;font-weight:900;letter-spacing:-0.03em;color:var(--primary)}
+.challenge .after{font-size:18px;color:var(--body2)}
+.challenge .right{grid-column:8 / span 5;display:flex;flex-direction:column;gap:16px;padding-top:24px}
+.art{border-radius:40px;padding:36px;background:var(--paper);border:1.5px solid var(--ink);display:flex;flex-direction:column;gap:18px}
+.art h3{font-family:var(--display);font-size:34px;font-weight:900;letter-spacing:-0.02em;line-height:1}
+.art p{font-size:18px;line-height:1.55;color:var(--body2)}
+.rule{border-radius:40px;padding:36px;background:var(--primary);color:var(--on-dark);display:flex;flex-direction:column;gap:16px}
+.rule .k{font-family:var(--display);font-size:12px;font-weight:800;letter-spacing:0.08em;color:var(--on-primary-muted)}
+.rule p{font-family:var(--display);font-size:clamp(28px,2.6vw,38px);font-weight:900;line-height:1;letter-spacing:-0.03em}
+.method-link{font-family:var(--display);font-size:15px;font-weight:800;letter-spacing:0.04em}
+@media (max-width:900px){.challenge .left,.challenge .right{grid-column:1 / -1}.challenge .right{padding-top:0}}
+
+/* next */
+.next{padding-block:48px 144px}
+.pbox{position:relative;border:1.5px solid var(--ink);border-radius:64px;padding:clamp(40px,6vw,88px) clamp(24px,6vw,88px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:40px 24px}
+.pbox > .pill{position:absolute;top:-18px;right:clamp(24px,6vw,88px);font-size:13px;padding:8px 18px}
+.pbox .q{grid-column:1 / span 7;display:flex;flex-direction:column;gap:24px}
+.pbox .q p{font-size:16px;color:var(--muted)}
+.pbox blockquote{font-family:var(--display);font-size:clamp(34px,4.4vw,64px);font-weight:900;line-height:0.95;letter-spacing:-0.035em}
+.pbox .who{grid-column:9 / span 4;display:flex;flex-direction:column;gap:16px}
+.pbox .who h3{font-family:var(--display);font-size:13px;font-weight:800;letter-spacing:0.08em;color:var(--muted)}
+.pbox .who li{border-top:1.5px solid var(--ink);padding:12px 0;font-size:18px}
+.pbox .who li:last-child{border-bottom:1.5px solid var(--ink)}
+.pbox .long{grid-column:1 / -1;font-size:18px;color:var(--body2);max-width:760px}
+@media (max-width:900px){.pbox .q,.pbox .who{grid-column:1 / -1}}
+
+.trust{margin-top:24px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.tr{border-radius:32px;padding:28px;display:flex;flex-direction:column;gap:12px}
+.tr h3{font-family:var(--display);font-size:13px;font-weight:800;letter-spacing:0.08em}
+.tr p{font-size:17px;line-height:1.55}
+.tr.disc{grid-column:span 7;background:var(--paper);border:1.5px solid var(--ink)} .tr.disc p{color:var(--body2)} .tr.disc h3{color:var(--muted)}
+.tr.pub{grid-column:span 5;border:1.5px solid var(--ink)} .tr.pub h3{color:var(--muted)}
+.tr.pub ul{display:flex;flex-direction:column;gap:10px}
+.tr.pub li{font-size:17px} .tr.pub b{font-family:var(--display);font-weight:800}
+@media (max-width:900px){.tr.disc,.tr.pub{grid-column:1 / -1}}
+.updated{margin-top:20px;font-size:15px;color:var(--muted)}
+
+/* cta */
+.cta .inner{padding-block:160px 144px;display:flex;flex-direction:column;gap:44px}
+.cta .k{font-size:17px;color:var(--dark-muted)}
+.cta h2{font-size:clamp(52px,8vw,116px);line-height:0.88;letter-spacing:-0.05em}
+.cta .row{display:flex;flex-wrap:wrap;align-items:center;gap:24px 32px}
+.btn-work{background:var(--accent);color:var(--ink)!important;border-radius:8px;padding:24px 40px;font-family:var(--display);font-size:18px;font-weight:900;letter-spacing:0.06em;text-decoration:none}
+.btn-work:focus-visible{outline-color:var(--accent)}
+.cta .note{max-width:640px;font-size:22px;line-height:1.55;color:var(--dark-body)}
+
+footer .inner{padding-block:48px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px}
+footer .fl{display:flex;flex-wrap:wrap;gap:12px 32px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ProfilePage",
+  "@id":"https://phil-loney.com/about#profilepage",
+  "url":"https://phil-loney.com/about",
+  "name":"About Phil Loney",
+  "dateModified":"2026-10-20",
+  "inLanguage":"en-AU",
+  "mainEntity":{
+    "@type":"Person",
+    "@id":"https://phil-loney.com/#person",
+    "name":"Phil Loney",
+    "url":"https://phil-loney.com/",
+    "image":"https://phil-loney.com/images/phil-loney-portrait.webp",
+    "jobTitle":"Marketing strategist",
+    "description":"Melbourne marketing strategist working in SEO, growth strategy and AI systems. Builds marketing intelligence systems that find commercial signals keyword tools miss.",
+    "homeLocation":{"@type":"Place","name":"Melbourne, Victoria, Australia"},
+    "knowsAbout":["Search engine optimisation","Programmatic SEO","Local SEO","Content strategy","Growth strategy","Go-to-market strategy","Marketing automation","AI content workflows","Large language models","Web scraping and data extraction"],
+    "hasCredential":{"@type":"EducationalOccupationalCredential","credentialCategory":"degree","about":"Marketing"}
+  }
+}
+</script>
+
+<div class="max">
+<header class="wrap">
+  <nav aria-label="Primary">
+    <a href="home.html" class="brand">PHIL LONEY</a>
+    <div class="links">
+      <a href="case-files.html">Case Studies</a>
+      <a href="about.html" aria-current="page">About Me</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html" class="btn-sub">SUBSCRIBE</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+<section class="hero wrap g12" aria-labelledby="h1">
+  <p class="k">About · Melbourne, Australia</p>
+  <div class="intro">
+    <h1 id="h1" class="d">PHIL<br>LONEY<span class="blue">.</span></h1>
+    <p class="role">Marketing strategist. <span class="blue">Builder of systems that find the signal.</span></p>
+    <div class="lede">
+      <p>I'm a Melbourne marketing strategist working across SEO, growth strategy and AI systems. I start with the commercial problem: what a business sells, who gets the most value from it, and where its next profitable growth sits. Then I build a system to test it.</p>
+      <p>Right now I work full-time in SEO at a Melbourne agency. I'm one of the people driving AI adoption there, working with our Head of SEO on implementation and workflow design. This site is where I publish what I learn and take on a small number of strategy engagements.</p>
+    </div>
+  </div>
+  <figure class="portrait">
+    <div class="frame"><img src="phil-loney-portrait-placeholder.svg" width="764" height="883" alt="Illustrated portrait of Phil Loney, smiling, in a dark blazer and patterned shirt."></div>
+    <figcaption>Phil Loney, Melbourne.</figcaption>
+    <div class="sticker" aria-hidden="true">MECHANISM<br>BEFORE<br>TACTIC</div>
+  </figure>
+  <dl class="facts">
+    <div><dt>BASED IN</dt><dd>Melbourne, Australia</dd></div>
+    <div><dt>BACKGROUND</dt><dd>Engineering and trades, then business development, then marketing</dd></div>
+    <div><dt>EDUCATION</dt><dd>Marketing degree, completed while working full-time</dd></div>
+    <div><dt>WORK</dt><dd>SEO strategy, programmatic SEO, content systems, AI workflows</dd></div>
+    <div><dt>READING</dt><dd>About 300 books in eight years on psychology, business, persuasion and marketing</dd></div>
+  </dl>
+</section>
+</main>
+</div>
+
+<section class="band title-band" aria-label="Origin">
+  <div class="max wrap inner">
+    <p>§01 · How I got here, and the account that changed how I work.</p>
+    <h2 class="d">ORIGIN<span class="lime">.</span></h2>
+  </div>
+</section>
+
+<div class="max">
+<section class="path wrap" aria-labelledby="path-h">
+  <div class="g12">
+    <h2 id="path-h" class="d">I DIDN'T START IN MARKETING.</h2>
+    <div class="prose">
+      <p>My route ran through engineering and trades, then business development, then marketing. I finished a marketing degree while working full-time.</p>
+      <p>Alongside it I kept reading: about 300 books over eight years. Formal study, independent reading and hands-on testing. That mix is still how I work.</p>
+    </div>
+  </div>
+  <ol class="stages">
+    <li class="stage"><span class="lbl">STAGE ONE</span><div><h3>Engineering and trades</h3></div></li>
+    <li class="stage"><span class="lbl">STAGE TWO</span><div><h3>Business development</h3></div></li>
+    <li class="stage"><span class="lbl">STAGE THREE</span><div style="display:flex;flex-direction:column;gap:10px"><h3>Marketing degree</h3><p>Studied while working full-time.</p></div></li>
+    <li class="stage"><span class="lbl">NOW</span><div style="display:flex;flex-direction:column;gap:10px"><h3>SEO, strategy and AI systems</h3><p>Grew from a newer SEO practitioner into strategy and AI adoption work at a Melbourne agency.</p></div></li>
+  </ol>
+</section>
+
+<section class="lesson wrap g12" aria-labelledby="lesson-h">
+  <div class="head">
+    <span class="pill">THE LESSON</span>
+    <h2 id="lesson-h" class="d">THE ACCOUNT I LOST TAUGHT ME THE MOST.</h2>
+  </div>
+  <div class="prose">
+    <p>I used to do SEO the conventional way. Find search volume, pick keywords, check competitors, build pages, chase rankings, report traffic.</p>
+    <p>Then I worked with a self-managed super fund (SMSF) specialist. That approach got them more traffic and better rankings, but not enough new clients.</p>
+    <p>So I went back to their onboarding data. Their strongest source of business wasn't search. It was referrals from accountants. The question changed from <q>where do people search for SMSF auditors?</q> to <q>where do the referral partners cluster?</q></p>
+    <p>I scraped accounting-firm density across Melbourne suburbs and built location pages around the densest areas. Traffic more than tripled in about two months.</p>
+    <p>The account ended before the strategy could mature. As a commercial engagement it failed. As a lesson, it changed everything I've done since.</p>
+  </div>
+  <div class="outcome">
+    <div class="out a"><b>3×+</b><span>organic traffic in about two months, from pages built on referral-partner density</span></div>
+    <div class="out b"><b>Ended</b><span>before the strategy matured. I count it as a loss and say so.</span></div>
+    <div class="out c"><span class="k">WHAT I TOOK FROM IT</span><p>Search demand isn't always the best proxy for commercial opportunity. Sometimes whatever creates the demand is worth more than the demand itself.</p></div>
+  </div>
+</section>
+
+<section class="signals wrap-wide" aria-labelledby="sig-h">
+  <div class="shead">
+    <h2 id="sig-h" class="d">SIGNALS OTHER<br>MARKETERS MISS.</h2>
+    <p>Since then I look for signals that show where customers are, how concentrated they are and how ready they are to buy, even when keyword tools show almost nothing.</p>
+  </div>
+  <div class="sig-grid">
+    <article class="card c-dark">
+      <div class="top"><span class="pill">GROUP BOOKINGS</span><span>Fire safety training client</span></div>
+      <h3>FIRE WARDEN TRAINING</h3>
+      <p>Fire warden training sells to workplaces, mostly as group bookings. Instead of treating it as a consumer search product, I mapped where the training is required and where the client was willing to travel. Then I built regional location pages with substantial supporting content.</p>
+      <p>In the best month, the client took four group bookings at about $1,200 each, plus one booking of about 150 students rolling out over the rest of the year.</p>
+      <div class="grow"></div>
+      <div class="res"><b>$25K+</b><span>attributable revenue in that month, against a $1,000 monthly SEO engagement</span></div>
+    </article>
+    <article class="card c-white">
+      <div class="top"><span class="pill">DENSITY DATA</span><span>First aid training</span></div>
+      <h3>CHILDCARE FIRST AID</h3>
+      <p>Keyword tools showed tiny volumes. So I used a national registry of childcare centres as the dataset and ranked suburbs and cities by how many centres they hold.</p>
+      <p>Each centre is a potential group-training customer. Search volume in those areas can be close to zero while commercial intent stays high.</p>
+      <div class="grow"></div>
+      <p class="note">The same model as fire warden training, applied to a different registry.</p>
+    </article>
+  </div>
+  <div class="model" role="group" aria-label="Demand model comparison">
+    <div class="row">
+      <span class="lbl">THE MODEL I USE</span>
+      <ul class="chain mine">
+        <li>Customer density</li><li class="ar" aria-hidden="true">→</li>
+        <li>Organisational demand</li><li class="ar" aria-hidden="true">→</li>
+        <li>High-intent search</li><li class="ar" aria-hidden="true">→</li>
+        <li>Group booking</li><li class="ar" aria-hidden="true">→</li>
+        <li>Revenue</li>
+      </ul>
+    </div>
+    <div class="row">
+      <span class="lbl">THE DEFAULT MODEL</span>
+      <ul class="chain old">
+        <li>Keyword volume</li><li class="ar" aria-hidden="true">→</li>
+        <li>Traffic</li><li class="ar" aria-hidden="true">→</li>
+        <li>Conversion</li>
+      </ul>
+    </div>
+  </div>
+  <ul class="more" aria-label="Other results">
+    <li><b>3× organic revenue</b><span>for an ecommerce brand, by optimising its collection pages.</span></li>
+    <li><b>About $50,000 a year</b><span>in value from one email campaign for a residential cleaning business.</span></li>
+  </ul>
+</section>
+</div>
+
+<section class="band title-band" aria-label="AI systems">
+  <div class="max wrap inner">
+    <p>§02 · Where I am today: AI-assisted, moving deliberately to AI-native.</p>
+    <h2 class="d">SYSTEMS<span class="lime">.</span></h2>
+  </div>
+</section>
+
+<div class="max">
+<section class="ai wrap" aria-labelledby="ai-h">
+  <div class="g12">
+    <h2 id="ai-h" class="d">FROM FASTER TASKS TO REDESIGNED WORK.</h2>
+    <div class="prose">
+      <p>I don't just ask a model for an answer. I study how the output is produced, then build a tool around that process.</p>
+      <p>When our agency used AnswerThePublic, I researched how that kind of question discovery works and built a custom GPT that does a similar job. Some experiments fail. The ones that work become systems.</p>
+    </div>
+  </div>
+  <div class="scale" role="list">
+    <div class="lvl now" role="listitem"><span class="tag">WHERE I AM</span><h3>AI-assisted</h3><p>AI does an existing task faster.</p></div>
+    <div class="lvl" role="listitem"><span class="tag">IN PROGRESS</span><h3>AI-augmented</h3><p>The step between the two.</p></div>
+    <div class="lvl goal" role="listitem"><span class="tag">WHERE I'M GOING</span><h3>AI-native</h3><p>The task itself is redesigned, with AI built into the workflow.</p></div>
+  </div>
+</section>
+
+<section class="builds wrap-wide" aria-labelledby="builds-h">
+  <div class="shead">
+    <h2 id="builds-h" class="d">WHAT I'VE BUILT.</h2>
+    <p>My pattern for each one: research the mechanism, build, test, diagnose, improve.</p>
+  </div>
+  <div class="b-grid">
+    <article class="bx blue">
+      <div class="top"><span class="pill">IN USE</span><span>Agency content workflow</span></div>
+      <h3>SEO CONTENT-WRITING SYSTEM</h3>
+      <p>I rebuilt the agency's content process. One prompt and a few guardrails became a full instruction set with supporting documents for location pages, blog articles, search intent, structure, NLP coverage, research method and guardrails, plus a prompt library to drive it.</p>
+      <div class="grow"></div>
+      <div class="nums">
+        <div><b>~5 min</b><span>to a first draft, down from about two hours</span></div>
+        <div><b>50–60%</b><span>less initial writing work</span></div>
+      </div>
+    </article>
+    <article class="bx dark">
+      <div class="top"><span class="pill">CORPUS</span><span>Claude Code, Firecrawl, Supabase</span></div>
+      <h3>STARTUP INTELLIGENCE DATABASE</h3>
+      <p>A scraping and extraction pipeline that stores startup growth stories in PostgreSQL, queryable by channel and tactic. It powers a go-to-market report generator for founders.</p>
+      <div class="grow"></div>
+      <div class="nums">
+        <div><b>400+</b><span>growth case studies</span></div>
+        <div><b>200+</b><span>founder interviews</span></div>
+      </div>
+    </article>
+    <article class="bx white">
+      <div class="top"><span class="pill">IN USE</span><span>Quality checks</span></div>
+      <h3>EVALUATION TOOLS</h3>
+      <p>Separate systems for helpful-content review, content-gap analysis, Hemingway readability, humanisation and SEO optimisation.</p>
+      <p>The readability tool works section by section. It simplifies sentences without stripping search intent, topical relevance or key terms.</p>
+    </article>
+    <article class="bx line">
+      <div class="top"><span class="pill">IN USE</span><span>Per-client context</span></div>
+      <h3>CLIENT KNOWLEDGE BASES</h3>
+      <p>A workflow that starts with a full site crawl in Screaming Frog. AI then organises URLs, page content, metadata, services, company information and supporting documents into a knowledge base for each client. Every content workflow downstream works from that context instead of guessing.</p>
+    </article>
+    <article class="bx line span12">
+      <div class="top"><span class="pill">BUILDING NOW</span><span>n8n, Claude, MCP, Surfer</span></div>
+      <h3>A CLOSED-LOOP CONTENT ENGINE</h3>
+      <p>The next step connects these tools into one system. Each stage is a separate AI component, and evaluation loops send weak drafts back before they move on.</p>
+      <ul class="loop" aria-label="Content engine stages">
+        <li>Inputs</li><li class="ar" aria-hidden="true">→</li><li>Research</li><li class="ar" aria-hidden="true">→</li><li>Strategy</li><li class="ar" aria-hidden="true">→</li><li>First draft</li><li class="ar" aria-hidden="true">→</li><li class="ev">SEO check</li><li class="ar" aria-hidden="true">→</li><li class="ev">Helpful-content check</li><li class="ar" aria-hidden="true">→</li><li class="ev">Readability check</li><li class="ar" aria-hidden="true">→</li><li>Humanisation</li><li class="ar" aria-hidden="true">→</li><li>Final page</li>
+      </ul>
+      <p>Alongside it: a keyword split generator that combines crawl data, Search Console, rankings and competitor research, then sorts opportunities into existing-page wins, low-hanging impressions, competitive bets, long-term plays and gaps competitors haven't covered.</p>
+    </article>
+  </div>
+  <div class="toolkit">
+    <p>Tools I work with most</p>
+    <ul class="chips">
+      <li>Claude Code</li><li>Claude skills</li><li>MCP</li><li>n8n</li><li>Supabase</li><li>Firecrawl</li><li>Apify</li><li>Screaming Frog</li><li>Google Search Console</li><li>Surfer</li><li>Google Stitch</li>
+    </ul>
+  </div>
+</section>
+
+<section class="challenge wrap g12" aria-labelledby="ch-h">
+  <div class="left">
+    <span class="pill">HOW I WORK</span>
+    <h2 id="ch-h" class="d">HOW I CHALLENGE A BRIEF.</h2>
+    <p class="after">I'll push back when something fundamental looks wrong. I don't assume I'm right, so I work through it in this order:</p>
+    <ol>
+      <li>Ask why the recommendation exists.</li>
+      <li>Name the hypothesis behind it.</li>
+      <li>Ask what evidence supports it.</li>
+      <li>Test my own assumptions against that evidence.</li>
+      <li>Identify the likely problems.</li>
+      <li>Offer an alternative, if the evidence supports one.</li>
+    </ol>
+    <p class="after">The aim is to find the thinking behind a decision and test it.</p>
+    <a class="method-link" href="home.html#method">SEE MY NINE-STEP STRATEGY METHOD →</a>
+  </div>
+  <div class="right">
+    <div class="art">
+      <h3>Art and science.</h3>
+      <p>The art is people, positioning, creativity and communication. The science is measurement, experiments, data and causal reasoning.</p>
+      <p>I'm sceptical of marketing advice that stays at the level of principle, with no mechanism you can test.</p>
+    </div>
+    <div class="rule">
+      <span class="k">MY RULE</span>
+      <p>Test it first. Understand why it worked. Then teach the principle.</p>
+    </div>
+  </div>
+</section>
+
+<section class="next wrap" aria-labelledby="next-h">
+  <div class="pbox">
+    <span class="pill">WHERE THIS IS GOING</span>
+    <div class="q">
+      <p id="next-h">The brief I want to be handed</p>
+      <blockquote>“Help us find our next major growth opportunity, and help us build it.”</blockquote>
+    </div>
+    <div class="who">
+      <h3>WHO I'M BUILDING TOWARD</h3>
+      <ul>
+        <li>Newly funded startups</li>
+        <li>Scale-ups</li>
+        <li>Companies entering new markets</li>
+        <li>Businesses with complex growth problems</li>
+      </ul>
+    </div>
+    <p class="long">Over the next five years I'm moving toward senior strategy work with these companies. I also want to teach what I learn: through this site, through speaking, and eventually a book built on frameworks that have been tested in the field.</p>
+  </div>
+  <div class="trust">
+    <div class="tr disc">
+      <h3>DISCLOSURE</h3>
+      <p>I'm employed full-time at a Melbourne SEO agency. My independent work is separate from that role and doesn't include my employer's clients.</p>
+      <p>Results on this page come from my own client work. Client names are left out.</p>
+    </div>
+    <div class="tr pub">
+      <h3>WHERE I PUBLISH</h3>
+      <ul>
+        <li><b>Breakdowns</b>: my editorial series.</li>
+        <li><b>Jarvis SEO Brief</b>: my SEO newsletter.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="updated">Page last updated 20 October 2026.</p>
+</section>
+</div>
+
+<section class="band cta" aria-labelledby="cta-h">
+  <div class="max wrap inner">
+    <p class="k">§03 · Work with me</p>
+    <h2 id="cta-h" class="d">BRING THE DATA.<br><span class="lime">I'LL FIND THE SIGNAL.</span></h2>
+    <div class="row">
+      <a href="contact.html" class="btn-work">WORK WITH ME</a>
+    </div>
+    <p class="note">Tell me what you sell, who buys it and what you've already tried. If the usual channels haven't moved the number, that's where I start.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="max wrap inner">
+    <div>
+      <p>Phil Loney, marketing strategist and systems thinker, Melbourne.</p>
+      <p class="muted" style="font-size:15px">© 2026</p>
+    </div>
+    <div class="fl">
+      <a href="blog.html">Breakdowns</a>
+      <a href="blog.html">Jarvis SEO Brief</a>
+      <a href="home.html">phil-loney.com</a>
+    </div>
+  </div>
+</footer>
+
+</body></html>
